@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AgriDevcor — Agricultural Development & Sustainability" },
+      { name: "description", content: "AgriDevcor delivers climate-smart agriculture, sustainable farm development, and agribusiness advisory for governments, NGOs and investors." },
+      { name: "author", content: "AgriDevcor" },
+      { property: "og:title", content: "AgriDevcor — Agricultural Development & Sustainability" },
+      { property: "og:description", content: "Climate-smart agriculture, sustainable farm development, and agribusiness advisory." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:site_name", content: "AgriDevcor" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
@@ -113,13 +113,22 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { useRouterState } from "@tanstack/react-router";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const transparent = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Navbar transparentOnTop={transparent} />
+      <main id="main" className={transparent ? "" : "pt-16 md:pt-20"}>
+        <Outlet />
+      </main>
+      <Footer />
     </QueryClientProvider>
   );
 }
