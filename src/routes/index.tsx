@@ -23,9 +23,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const stats = [
-  { value: "120+", label: "Projects delivered" },
-];
 
 const services = [
   { icon: Sprout, title: "Climate-Smart Agriculture", desc: "Regenerative practices, carbon-smart cropping and resilient value chains." },
@@ -53,51 +50,9 @@ const partners = ["WORLD BANK", "FAO", "USAID", "GIZ", "AGRA", "IFAD", "AfDB"];
 function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative isolate min-h-[92vh] flex items-center overflow-hidden">
-        <img
-          src={heroImg}
-          alt="Aerial view of green terraced farmland with modern irrigation"
-          width={1920}
-          height={1280}
-          className="absolute inset-0 size-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(110deg,oklch(0.18_0.05_152/0.85)_0%,oklch(0.18_0.05_152/0.55)_55%,transparent_100%)]" />
-        <div className="relative container-px mx-auto max-w-7xl pt-32 pb-20 md:pt-40 md:pb-32 text-white">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur px-3 py-1 text-xs font-semibold tracking-widest uppercase animate-fade-in">
-              <Sprout className="size-3.5" /> Agricultural Development · Since 2009
-            </span>
-            <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight animate-fade-up">
-              Building the future of <span className="text-accent">resilient</span> agriculture.
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl animate-fade-up delay-100">
-              We partner with governments, donors and agribusinesses to design climate-smart
-              systems that increase productivity, restore ecosystems, and lift rural economies.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3 animate-fade-up delay-200">
-              <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-12 px-7 text-base font-semibold">
-                <Link to="/services">Explore our work <ArrowRight className="ml-1 size-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full bg-white/0 border-white/40 text-white hover:bg-white/10 hover:text-white h-12 px-7 text-base">
-                <Link to="/projects">View projects</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
+      <StatsCounter />
 
-      {/* STATS */}
-      <section className="border-y border-border bg-surface">
-        <div className="container-px mx-auto max-w-7xl py-12 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center md:text-left">
-              <div className="text-3xl md:text-5xl font-bold tracking-tight text-primary-dark">{s.value}</div>
-              <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ABOUT PREVIEW */}
       <section className="section-y">
