@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import heroImg from "@/assets/hero-fields.jpg";
+import { HeroSlider } from "@/components/home/HeroSlider";
+import { StatsCounter } from "@/components/home/StatsCounter";
 import aboutImg from "@/assets/about-soil.jpg";
 import projTraining from "@/assets/project-training.jpg";
 import projIrrigation from "@/assets/project-irrigation.jpg";
@@ -24,9 +25,6 @@ export const Route = createFileRoute("/")({
 
 const stats = [
   { value: "120+", label: "Projects delivered" },
-  { value: "32", label: "Countries reached" },
-  { value: "1.4M", label: "Smallholders impacted" },
-  { value: "$480M", label: "Investment mobilized" },
 ];
 
 const services = [
