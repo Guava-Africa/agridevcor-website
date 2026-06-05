@@ -56,12 +56,8 @@ export function Navbar({ transparentOnTop = false }: { transparentOnTop?: boolea
           aria-label="Primary"
           className="container-px mx-auto flex h-16 md:h-20 max-w-7xl items-center justify-between"
         >
-          <div className={cn(
-            "rounded-md px-1 transition-colors",
-            !solid && "bg-white/85 backdrop-blur",
-          )}>
-            <Logo />
-          </div>
+          <Logo variant={solid ? "default" : "light"} />
+
 
           <ul className="hidden lg:flex items-center gap-1">
             {nav.map((item) => (

@@ -13,9 +13,8 @@ export function Footer() {
     <footer className="bg-primary-dark text-primary-foreground mt-24">
       <div className="container-px mx-auto max-w-7xl py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="inline-flex items-center rounded-md bg-white/95 px-3 py-2">
-            <Logo />
-          </div>
+          <Logo variant="light" />
+
           <p className="mt-5 text-sm text-white/70 max-w-xs leading-relaxed">
             Growing a better tomorrow through sustainable agriculture, climate-smart
             innovation, and inclusive rural development.
