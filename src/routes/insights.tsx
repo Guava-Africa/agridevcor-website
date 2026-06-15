@@ -38,8 +38,10 @@ function InsightsPage() {
     <>
       <section className="bg-soft section-y">
         <div className="container-px mx-auto max-w-5xl text-center">
-          <span className="eyebrow">Insights</span>
-          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground">Thinking from the field.</h1>
+          <span className="eyebrow"><strong>Insights</strong></span>
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground animate-fade-up">
+            Thinking from the field.
+          </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
             Notes, briefs and research from our practitioners on the questions shaping the future of agriculture.
           </p>

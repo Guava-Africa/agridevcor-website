@@ -8,11 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact AgriDevcor — Start a conversation" },
-      { name: "description", content: "Get in touch with AgriDevcor. Offices in Nairobi, Kigali and Accra. We respond within two working days." },
+      { name: "description", content: "Get in touch with AgriDevcor. O. We respond within two working days." },
       { property: "og:title", content: "Contact AgriDevcor" },
       { property: "og:description", content: "Reach our team to discuss programs, partnerships or proposals." },
       { property: "og:url", content: "/contact" },
@@ -32,16 +33,14 @@ const schema = z.object({
 });
 
 const offices = [
-  { city: "Nairobi", addr: "Riverside Square, Westlands", role: "HQ" },
-  { city: "Kigali", addr: "KG 7 Ave, Kacyiru", role: "East Africa" },
-  { city: "Accra", addr: "Airport Residential, Accra", role: "West Africa" },
+  {city: "Harare", role: "Headquarters", addr: "55 Lawley Avenue Belvedere Harare, Zimbabwe"},
 ];
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>)  {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const result = schema.safeParse(data);
@@ -62,8 +61,10 @@ function ContactPage() {
     <>
       <section className="bg-soft section-y">
         <div className="container-px mx-auto max-w-5xl text-center">
-          <span className="eyebrow">Contact</span>
-          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground">Let's talk.</h1>
+          <span className="eyebrow"><strong>Contact Us</strong></span>
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground animate-fade-up">
+           Let's talk.
+          </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
             Programs, partnerships, proposals — share a few details and our team will respond within two working days.
           </p>
@@ -105,8 +106,8 @@ function ContactPage() {
             <div>
               <h2 className="text-xl font-semibold">Direct lines</h2>
               <ul className="mt-5 space-y-4 text-sm">
-                <li className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-soft text-primary"><Mail className="size-4" /></span> hello@agridevcor.com</li>
-                <li className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-soft text-primary"><Phone className="size-4" /></span> +254 700 000 000</li>
+                <li className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-soft text-primary"><Mail className="size-4" /></span> info@agridevcor.com</li>
+                <li className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-lg bg-soft text-primary"><Phone className="size-4" /></span> +263 (0) 242-257156 / +263 (0) 242-257157</li>
               </ul>
             </div>
             <div>

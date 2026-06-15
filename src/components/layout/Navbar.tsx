@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaPhoneAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/Logo";
@@ -11,7 +11,7 @@ const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
-  { to: "/projects", label: "Projects" },
+  { to: "/products", label: "Products" },
   { to: "/gallery", label: "Gallery" },
   { to: "/insights", label: "Insights" },
   { to: "/contact", label: "Contact" },
@@ -27,6 +27,13 @@ export function Navbar({ transparentOnTop = false }: { transparentOnTop?: boolea
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname,
+  });
+
+  const isHomePage = pathname === "/";
+
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -39,7 +46,14 @@ export function Navbar({ transparentOnTop = false }: { transparentOnTop?: boolea
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const solid = !transparentOnTop || scrolled;
+  const solid = !isHomePage || scrolled;
+
+  console.log(
+  "pathname:", pathname,
+  "isHomePage:", isHomePage,
+  "scrolled:", scrolled,
+  "solid:", solid
+  );
 
   return (
     <header className="fixed top-0 inset-x-0 z-50">
@@ -54,38 +68,72 @@ export function Navbar({ transparentOnTop = false }: { transparentOnTop?: boolea
       >
         <nav
           aria-label="Primary"
-          className="container-px mx-auto flex h-16 md:h-20 max-w-7xl items-center justify-between"
+          className="container-px mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between transition-all duration-300"
         >
-          <Logo variant={solid ? "default" : "light"} />
+          <Logo
+               variant={solid ? "green" : "light"}
+               imgClassName={cn(
+              "w-auto object-contain transition-all duration-300",
+               solid
+              ? "h-30 md:h-20 lg:h-50"
+              : "h-30 md:h-28 lg:h-50"
+  )}
+/>
 
+          <ul className="hidden lg:flex items-center gap-5">
+  {nav.map((item) => (
+    <li key={item.to}>
+      <Link
+        to={item.to}
+        activeOptions={{ exact: item.to === "/" }}
+        className={cn(
+          "group flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+          solid
+            ? "text-foreground/80 hover:text-primary hover:bg-soft"
+            : "text-white/90 hover:text-white hover:bg-white/10"
+        )}
+        activeProps={{
+          className: solid
+            ? "text-primary bg-soft"
+            : "text-white bg-white/15"
+        }}
+      >
+        {({ isActive }) => {
+          const isHome = item.to === "/";
 
-          <ul className="hidden lg:flex items-center gap-1">
-            {nav.map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  activeOptions={{ exact: item.to === "/" }}
-                  className={cn(
-                    "px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                    solid
-                      ? "text-foreground/80 hover:text-primary hover:bg-soft"
-                      : "text-white/90 hover:text-white hover:bg-white/10",
-                  )}
-                  activeProps={{
-                    className: solid
-                      ? "text-primary bg-soft"
-                      : "text-white bg-white/15",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          return (
+            <>
+              <span>{item.label}</span>
 
+              {/* Hide Home arrow when on Home page */}
+              {!(isHome && isActive) && (
+                isActive ? (
+                  <ChevronUp
+                    className={cn(
+                      "h-3.5 w-3.5 transition-all duration-200",
+                      solid ? "text-[#006400]" : "text-white"
+                    )}
+                  />
+                ) : (
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-all duration-200",
+                      solid ? "text-[#006400]" : "text-white"
+                    )}
+                  />
+                )
+              )}
+            </>
+          );
+        }}
+      </Link>
+    </li>
+  ))}
+</ul>
+ 
           <div className="hidden lg:block">
             <Button asChild size="lg" className="rounded-full bg-primary hover:bg-primary-dark text-primary-foreground shadow-soft">
-              <Link to="/contact">Get Started</Link>
+              <Link to="/contact">Become A Partner</Link>
             </Button>
           </div>
 
@@ -119,7 +167,11 @@ export function Navbar({ transparentOnTop = false }: { transparentOnTop?: boolea
           )}
         >
           <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-            <Logo />
+            <Logo 
+              variant= "green"
+              imgClassName="h-12 md:h-14 w-auto object-contain"
+                  
+            />
             <button
               type="button"
               aria-label="Close menu"

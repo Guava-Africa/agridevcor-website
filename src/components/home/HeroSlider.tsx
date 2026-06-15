@@ -3,16 +3,16 @@ import { Link } from "@tanstack/react-router";
 import { FaSeedling, FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-fields.jpg";
-import irrigation from "@/assets/project-irrigation.jpg";
+import sorghum from "@/assets/sorgum.jpg";
 import climate from "@/assets/project-climate.jpg";
-import training from "@/assets/project-training.jpg";
+import wateringMaize from "@/assets/man watering maize plants.jpg";
 import { cn } from "@/lib/utils";
 
 const slides = [
   { src: heroImg, alt: "Aerial view of green terraced farmland" },
-  { src: irrigation, alt: "Precision irrigation in operation" },
+  { src: sorghum, alt: "Sorghum field in full bloom" },
   { src: climate, alt: "Climate-smart agriculture in practice" },
-  { src: training, alt: "Farmers training on digital extension" },
+  { src: wateringMaize, alt: "Farmer watering maize plants" },
 ];
 
 const SLIDE_MS = 6500;
@@ -27,6 +27,7 @@ export function HeroSlider() {
 
   return (
     <section className="relative isolate min-h-[92vh] flex items-center overflow-hidden">
+
       {/* Slides — Ken Burns */}
       <div className="absolute inset-0">
         {slides.map((s, i) => (
@@ -50,35 +51,49 @@ export function HeroSlider() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,oklch(0.1_0.05_152/0.55),transparent_60%)]" />
 
       {/* Content */}
-      <div className="relative container-px mx-auto max-w-7xl pt-32 pb-24 md:pt-40 md:pb-32 text-white">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur px-3 py-1 text-xs font-semibold tracking-widest uppercase animate-fade-in">
-            <FaSeedling className="size-3.5" /> AgriDevcor · Growing a better tomorrow
+      <div className="relative container-px mx-auto max-w-7xl pt-28 pb-20 md:pt-32 md:pb-28 text-white">
+        <div className="max-full max-w-6xl">
+          
+          {/* Badge */}
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-3 py-1 text-[10px] font-bold tracking-[0.12em] uppercase text-white/80 animate-fade-in">
+            <FaSeedling className="size-3 text-accent shrink-0" />
+            AgriDevcor · Growing a better tomorrow
           </span>
-          <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight animate-fade-up">
+
+          {/* Headline */}
+          <h1 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-[1.08] tracking-tight animate-fade-up">
             Growing a better tomorrow through{" "}
-            <span className="text-accent">sustainable agriculture</span>.
+            <em className="text-accent not-italic">sustainable agriculture</em>.
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl animate-fade-up delay-100">
+
+          {/* Subtext */}
+          <p className="mt-5 text-sm md:text-base text-white/75 leading-relaxed animate-fade-up delay-100">
             Empowering farmers, strengthening communities, advancing climate-smart
             agriculture, and delivering innovative development solutions that create
             lasting impact.
           </p>
-          <div className="mt-10 flex flex-wrap gap-3 animate-fade-up delay-200">
-            <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-12 px-7 text-base font-semibold">
-              <Link to="/services">Explore our services <FaArrowRight className="ml-2 size-3.5" /></Link>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-wrap items-center gap-3 animate-fade-up delay-200">
+            <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-10 px-6 text-sm font-bold">
+              <Link to="/services">
+                Explore our services <FaArrowRight className="ml-2 size-3" />
+              </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full bg-white/0 border-white/40 text-white hover:bg-white/10 hover:text-white h-12 px-7 text-base">
-              <Link to="/projects">View projects</Link>
+
+            <Button asChild size="lg" variant="outline" className="rounded-full border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white hover:border-white/50 h-10 px-6 text-sm font-semibold">
+              <Link to="/products">View Products</Link>
             </Button>
-            <Button asChild size="lg" variant="ghost" className="rounded-full text-white hover:bg-white/10 hover:text-white h-12 px-5 text-base">
-              <Link to="/contact">Contact us</Link>
+
+            <Button asChild size="lg" variant="ghost" className="text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4 decoration-white/30 h-10 px-2 text-sm">
+              <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
+
         </div>
 
         {/* Slide dots */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:right-12 md:translate-x-0 flex items-center gap-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:right-12 md:translate-x-0 flex items-center gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
@@ -92,6 +107,8 @@ export function HeroSlider() {
           ))}
         </div>
       </div>
+
     </section>
+    
   );
 }

@@ -1,49 +1,66 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/agridevcor-logo.png.asset.json";
+import whiteLogo from "@/assets/agridevcorlogo.png";
+import greenLogo from "@/assets/agridevcorlogo-green.png";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
-  variant?: "default" | "light";
   withTagline?: boolean;
   className?: string;
   imgClassName?: string;
   asLink?: boolean;
+  variant?: "light" | "green";
 }
 
 export function Logo({
-  variant = "default",
   withTagline = false,
   className,
   imgClassName,
   asLink = true,
+  variant = "green",
 }: LogoProps) {
-  const img = (
-    <img
-      src={logoAsset.url}
-      alt="AgriDevcor — Growing a better tomorrow"
-      width={1920}
-      height={820}
-      className={cn(
-        "h-9 md:h-10 w-auto object-contain select-none",
-        variant === "light" && "brightness-0 invert",
-        imgClassName,
-      )}
-      draggable={false}
-    />
-  );
-
   const content = (
-    <span className={cn("inline-flex items-center", className)}>
-      {img}
+    <span
+      className={cn(
+        "inline-flex items-center group",
+        className
+      )}
+    >
+      <img
+        src={variant === "light" ? whiteLogo : greenLogo}
+        alt="AgriDevcor — Growing a better tomorrow"
+        draggable={false}
+        className={cn(
+          `
+          h-24
+          md:h-32
+          lg:h-40
+          w-auto
+          object-contain
+          select-none
+          transition-all
+          duration-300
+          group-hover:scale-105
+          `,
+          imgClassName
+        )}
+      />
+
       {withTagline && (
-        <span className="sr-only">AgriDevcor — Growing a better tomorrow</span>
+        <span className="sr-only">
+          AgriDevcor — Growing a better tomorrow
+        </span>
       )}
     </span>
   );
 
   if (!asLink) return content;
+
   return (
-    <Link to="/" aria-label="AgriDevcor home" className="inline-flex items-center">
+    <Link
+      to="/"
+      aria-label="AgriDevcor Home"
+      className="inline-flex items-center"
+    >
       {content}
     </Link>
   );

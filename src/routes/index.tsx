@@ -3,10 +3,9 @@ import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Mi
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { HeroSlider } from "@/components/home/HeroSlider";
-import { StatsCounter } from "@/components/home/StatsCounter";
 import aboutImg from "@/assets/about-soil.jpg";
-import projTraining from "@/assets/project-training.jpg";
 import projIrrigation from "@/assets/project-irrigation.jpg";
+import ScrollIndicator from "@/components/home/ScrollIndicator";
 import projClimate from "@/assets/project-climate.jpg";
 
 export const Route = createFileRoute("/")({
@@ -33,10 +32,10 @@ const services = [
   { icon: Microscope, title: "Research & Innovation", desc: "Applied research on varieties, soils and climate-resilient systems." },
 ];
 
-const projects = [
+const products = [
   { img: projIrrigation, tag: "Irrigation", title: "Smart Drip Network — Rift Valley", desc: "12,000 ha of horticulture under precision irrigation." },
   { img: projClimate, tag: "Climate", title: "Solar-Powered Cold Chains", desc: "Off-grid storage for 38 smallholder cooperatives." },
-  { img: projTraining, tag: "Capacity", title: "Digital Extension Platform", desc: "Mobile-first advisory reaching 220,000 farmers." },
+  
 ];
 
 const insights = [
@@ -45,13 +44,16 @@ const insights = [
   { tag: "Policy", title: "Designing climate finance that reaches the farm gate", read: "10 min read" },
 ];
 
-const partners = ["WORLD BANK", "FAO", "USAID", "GIZ", "AGRA", "IFAD", "AfDB"];
-
 function Home() {
   return (
     <>
+
+      <section id="hero">
       <HeroSlider />
-      <StatsCounter />
+      </section>
+
+      <ScrollIndicator />
+      
 
 
       {/* ABOUT PREVIEW */}
@@ -68,7 +70,7 @@ function Home() {
             />
             <div className="hidden md:flex absolute -bottom-6 -right-6 bg-card border border-border rounded-xl shadow-soft p-5 gap-3 items-center max-w-xs">
               <Globe2 className="size-8 text-primary shrink-0" />
-              <p className="text-sm text-muted-foreground">Active programs across <strong className="text-foreground">Africa, Asia & Latin America</strong>.</p>
+              <p className="text-sm text-muted-foreground">Active programs across <strong className="text-foreground">Africa</strong>.</p>
             </div>
           </div>
           <div>
@@ -132,18 +134,18 @@ function Home() {
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
+      {/* FEATURED PRODUCTS */}
       <section className="section-y">
         <div className="container-px mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Featured projects"
-            title="Programs that move the needle."
+            eyebrow="Featured products"
+            title="Innovative solutions for modern agriculture."
           />
           <div className="mt-14 grid md:grid-cols-3 gap-6">
-            {projects.map((p) => (
+            {products.map((p) => (
               <Link
                 key={p.title}
-                to="/projects"
+                to="/products"
                 className="group rounded-2xl overflow-hidden bg-card border border-border hover:shadow-elegant transition-all duration-300"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -159,7 +161,7 @@ function Home() {
           </div>
           <div className="mt-12 text-center">
             <Button asChild size="lg" variant="outline" className="rounded-full">
-              <Link to="/projects">Browse all projects <ArrowRight className="ml-1 size-4" /></Link>
+              <Link to="/products">Browse all products <ArrowRight className="ml-1 size-4" /></Link>
             </Button>
           </div>
         </div>
@@ -175,18 +177,6 @@ function Home() {
           </blockquote>
           <div className="mt-8 text-sm text-white/70">
             Director of Agriculture Programs · Regional Development Bank
-          </div>
-        </div>
-      </section>
-
-      {/* PARTNERS */}
-      <section className="py-14 border-b border-border">
-        <div className="container-px mx-auto max-w-7xl">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Trusted by leading institutions</p>
-          <div className="mt-8 flex flex-wrap gap-x-12 gap-y-6 items-center justify-center opacity-70">
-            {partners.map((p) => (
-              <span key={p} className="font-display font-bold tracking-widest text-foreground/70 text-sm md:text-base">{p}</span>
-            ))}
           </div>
         </div>
       </section>
@@ -208,24 +198,6 @@ function Home() {
                 <p className="mt-6 text-xs text-muted-foreground">{i.read}</p>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-y">
-        <div className="container-px mx-auto max-w-6xl">
-          <div className="rounded-3xl overflow-hidden bg-[var(--gradient-hero)] p-10 md:p-16 text-primary-foreground relative">
-            <div className="absolute inset-0 opacity-10 [background-image:radial-gradient(circle_at_20%_20%,white_0,transparent_40%)]" />
-            <div className="relative grid md:grid-cols-[1fr_auto] items-center gap-8">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Have a program in mind?</h2>
-                <p className="mt-3 text-white/85 max-w-xl">Tell us about your context and goals. We'll respond within two working days with how we can help.</p>
-              </div>
-              <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-12 px-8 text-base font-semibold">
-                <Link to="/contact">Start a conversation <ArrowRight className="ml-1 size-4" /></Link>
-              </Button>
-            </div>
           </div>
         </div>
       </section>

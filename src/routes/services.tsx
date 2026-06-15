@@ -33,12 +33,12 @@ function ServicesPage() {
     <>
       <section className="bg-soft section-y">
         <div className="container-px mx-auto max-w-5xl text-center">
-          <span className="eyebrow">Services</span>
-          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground">
+          <span className="eyebrow"><strong>Services</strong></span>
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground animate-fade-up">
             Eight practice areas. One integrated team.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto">
-            We work across the agri value chain — pairing technical specialists with development
+            We work across the agricultural value chain — pairing technical specialists with development
             economists, ecologists and engineers to solve complex problems end-to-end.
           </p>
         </div>
@@ -62,8 +62,8 @@ function ServicesPage() {
                   </li>
                 ))}
               </ul>
-              <Link to="/projects" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark">
-                Related projects <ArrowRight className="size-3.5" />
+              <Link to="/products" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark">
+                Related products <ArrowRight className="size-3.5" />
               </Link>
             </article>
           ))}
