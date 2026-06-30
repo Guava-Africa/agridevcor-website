@@ -175,3 +175,83 @@
 .delay-200 { animation-delay: .2s; }
 .delay-300 { animation-delay: .3s; }
 .delay-400 { animation-delay: .4s; }
+
+/* Bokeh background animation */
+@keyframes bokehMove {
+  0% {
+    background-position: 0% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    background-position: 50% 100%;
+    transform: scale(1.05) rotate(1deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    background-position: 50% 0%;
+    transform: scale(0.95) rotate(-1deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Slow animation class */
+.animate-bokeh-slow {
+  animation: bokehMove 120s ease-in-out infinite;
+}
+
+/* Animation delay utilities */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Premium motion system */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-blob { animation: blob 18s ease-in-out infinite; }
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+@utility glass {
+  @apply border border-white/20 bg-white/10 backdrop-blur-xl;
+}
+@utility glass-dark {
+  @apply border border-white/10 bg-black/40 backdrop-blur-2xl;
+}
+@utility glass-light {
+  @apply border border-white/40 bg-white/70 backdrop-blur-xl shadow-soft;
+}
+@utility card-hover {
+  @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-elegant;
+}
+@utility text-balance {
+  text-wrap: balance;
+}

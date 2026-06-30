@@ -1,206 +1,278 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Quote } from "lucide-react";
+import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Quote, Leaf, Tractor } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { HeroSlider } from "@/components/home/HeroSlider";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
+import { GlassCard } from "@/components/motion/GlassCard";
+import { SectionShell } from "@/components/motion/SectionShell";
+import { Marquee } from "@/components/motion/Marquee";
+import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
 import aboutImg from "@/assets/about-soil.jpg";
 import projIrrigation from "@/assets/project-irrigation.jpg";
-import ScrollIndicator from "@/components/home/ScrollIndicator";
 import projClimate from "@/assets/project-climate.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AgriDevcor — Agricultural Development, Sustainability & Green Tech" },
-      { name: "description", content: "Premium consulting in climate-smart agriculture, irrigation, agribusiness and rural development. Trusted by governments, NGOs and investors." },
-      { property: "og:title", content: "AgriDevcor — Agricultural Development & Sustainability" },
-      { property: "og:description", content: "Climate-smart agriculture, sustainable farm development and agribusiness advisory." },
-      { property: "og:url", content: "/" },
+      { title: "AgriDevcor — Agricultural Development & Sustainability" },
+      { name: "description", content: "Premium consulting in climate-smart agriculture, irrigation, agribusiness and rural development." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });
 
-
 const services = [
-  { icon: Sprout, title: "Climate-Smart Agriculture", desc: "Regenerative practices, carbon-smart cropping and resilient value chains." },
-  { icon: Droplets, title: "Irrigation & Water", desc: "Drip, pivot and solar-powered irrigation systems engineered for scale." },
-  { icon: BarChart3, title: "Agribusiness Advisory", desc: "Feasibility, market entry and investment structuring for agri-enterprises." },
-  { icon: GraduationCap, title: "Training & Capacity", desc: "Farmer field schools and extension programs that change practice at scale." },
-  { icon: LineChart, title: "Monitoring & Evaluation", desc: "Theory of change, MEAL frameworks and impact verification." },
-  { icon: Microscope, title: "Research & Innovation", desc: "Applied research on varieties, soils and climate-resilient systems." },
+  { icon: Sprout, title: "Climate-Smart Agriculture", desc: "Regenerative practices, carbon-smart cropping and resilient value chains.", color: "from-primary to-primary-dark" },
+  { icon: Droplets, title: "Irrigation & Water", desc: "Drip, pivot and solar-powered irrigation systems engineered for scale.", color: "from-emerald-600 to-primary-dark" },
+  { icon: BarChart3, title: "Agribusiness Advisory", desc: "Feasibility, market entry and investment structuring for agri-enterprises.", color: "from-teal-700 to-primary-dark" },
+  { icon: GraduationCap, title: "Training & Capacity", desc: "Farmer field schools and extension programs that change practice at scale.", color: "from-green-700 to-primary-dark" },
+  { icon: LineChart, title: "Monitoring & Evaluation", desc: "Theory of change, MEAL frameworks and impact verification.", color: "from-primary-dark to-emerald-900" },
+  { icon: Microscope, title: "Research & Innovation", desc: "Applied research on varieties, soils and climate-resilient systems.", color: "from-emerald-700 to-teal-900" },
 ];
 
-const products = [
-  { img: projIrrigation, tag: "Irrigation", title: "Smart Drip Network — Rift Valley", desc: "12,000 ha of horticulture under precision irrigation." },
-  { img: projClimate, tag: "Climate", title: "Solar-Powered Cold Chains", desc: "Off-grid storage for 38 smallholder cooperatives." },
-  
+const testimonials = [
+  { text: "AgriDevcor designed the most rigorous and grounded irrigation feasibility we've ever commissioned.", author: "Director of Agriculture Programs", location: "Regional Development Bank" },
+  { text: "Their team blends world-class technical depth with genuine field empathy. Transformational work.", author: "Sarah Mitchell", location: "Nairobi, Kenya" },
+  { text: "The impact on our smallholder cooperative has been immeasurable. We've doubled our yield sustainably.", author: "James Omondi", location: "Kisumu, Kenya" },
+  { text: "Finally, an agricultural consultancy that puts both people and planet first. Highly recommended.", author: "Dr. Amina Hassan", location: "Dar es Salaam, Tanzania" },
 ];
 
-const insights = [
-  { tag: "Sustainability", title: "Five levers to decarbonize African agri-value chains", read: "8 min read" },
-  { tag: "Innovation", title: "Why precision irrigation is the next frontier", read: "6 min read" },
-  { tag: "Policy", title: "Designing climate finance that reaches the farm gate", read: "10 min read" },
+const partners = [
+  "World Bank", "FAO", "USAID", "AfDB", "EU Delegation", "UNDP", "IFAD", "GIZ", "Syngenta", "Corteva",
 ];
 
 function Home() {
   return (
     <>
-
       <section id="hero">
-      <HeroSlider />
+        <HeroSlider />
       </section>
 
-      <ScrollIndicator />
-      
+      {/* Stats marquee */}
+      <div className="border-y border-border/60 bg-soft/50 py-5">
+        <Marquee speed="slow">
+          {partners.map((p) => (
+            <span key={p} className="flex items-center gap-3 px-6 text-sm font-semibold text-muted-foreground/60 uppercase tracking-widest">
+              <Tractor className="size-4 text-primary/40" />
+              {p}
+            </span>
+          ))}
+        </Marquee>
+      </div>
 
-
-      {/* ABOUT PREVIEW */}
-      <section className="section-y">
-        <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative">
-            <img
-              src={aboutImg}
-              alt="Hands holding rich soil with a green seedling"
-              loading="lazy"
-              width={1280}
-              height={960}
-              className="rounded-2xl shadow-elegant w-full object-cover aspect-[4/3]"
-            />
-            <div className="hidden md:flex absolute -bottom-6 -right-6 bg-card border border-border rounded-xl shadow-soft p-5 gap-3 items-center max-w-xs">
-              <Globe2 className="size-8 text-primary shrink-0" />
-              <p className="text-sm text-muted-foreground">Active programs across <strong className="text-foreground">Africa</strong>.</p>
+      {/* Hero message */}
+      <SectionShell orbs>
+        <div className="container-px mx-auto max-w-4xl text-center">
+          <ScrollReveal>
+            <span className="eyebrow">Our Mission</span>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-foreground text-balance">
+              Grow a better tomorrow. <span className="gradient-text">Change lives.</span>
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              Agricultural transformation is hard. Getting expert support doesn't need to be.
+              We put sustainable farming solutions in your hands, with proven strategies
+              to increase yield, build resilience, and create lasting impact for communities.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="rounded-full px-8 font-semibold shadow-soft hover:shadow-elegant hover:scale-[1.02] transition-all">
+                <Link to="/contact">Start Your Journey <ArrowRight className="ml-2 size-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
+                <Link to="/services">Explore Services</Link>
+              </Button>
             </div>
-          </div>
-          <div>
-            <SectionHeading
-              eyebrow="About AgriDevcor"
-              title="Development expertise. Agricultural depth. Measurable impact."
-              description="For over a decade we've designed and delivered agricultural transformation programs at every scale — from smallholder cooperatives to national irrigation strategies. We combine technical rigor with development insight."
-            />
-            <ul className="mt-8 grid sm:grid-cols-2 gap-4">
-              {[
-                { icon: Shield, text: "Independent & evidence-based" },
-                { icon: Users, text: "Multi-disciplinary expert teams" },
-                { icon: Sun, text: "Climate & nature positive" },
-                { icon: BarChart3, text: "Outcomes you can measure" },
-              ].map((f) => (
-                <li key={f.text} className="flex items-start gap-3">
-                  <span className="grid size-9 place-items-center rounded-lg bg-soft text-primary shrink-0">
-                    <f.icon className="size-4" />
-                  </span>
-                  <span className="text-sm text-foreground/85 leading-relaxed pt-1.5">{f.text}</span>
-                </li>
-              ))}
-            </ul>
-            <Button asChild className="mt-10 rounded-full bg-primary hover:bg-primary-dark">
-              <Link to="/about">Our story <ArrowRight className="ml-1 size-4" /></Link>
-            </Button>
+          </ScrollReveal>
+        </div>
+      </SectionShell>
+
+      {/* Services */}
+      <SectionShell variant="gradient" orbs>
+        <div className="container-px mx-auto max-w-7xl">
+          <ScrollReveal className="text-center mb-16 max-w-2xl mx-auto">
+            <span className="eyebrow">What We Do</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
+              Transform agriculture at every scale
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Integrated expertise across climate, water, markets and capacity building.
+            </p>
+          </ScrollReveal>
+
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service) => (
+              <StaggerItem key={service.title}>
+                <GlassCard className={`group p-8 bg-gradient-to-br ${service.color} text-white border-0 h-full`} dark>
+                  <div className="size-14 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <service.icon className="size-7" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-white/85 leading-relaxed mb-6">{service.desc}</p>
+                  <Link to="/services" className="inline-flex items-center text-sm font-semibold text-white/90 hover:text-white transition-colors">
+                    Learn More <ArrowRight className="ml-2 size-4" />
+                  </Link>
+                </GlassCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </SectionShell>
+
+      {/* Impact stats */}
+      <SectionShell variant="dark">
+        <div className="container-px mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { value: 200, suffix: "+", label: "Projects Delivered" },
+              { value: 12, suffix: "", label: "African Countries" },
+              { value: 15, suffix: "+", label: "Years of Excellence" },
+              { value: 50, suffix: "K+", label: "Farmers Reached" },
+            ].map((stat, i) => (
+              <ScrollReveal key={stat.label} delay={i * 80}>
+                <p className="text-4xl md:text-5xl font-bold text-primary-light">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </p>
+                <p className="mt-2 text-sm text-white/60 uppercase tracking-wider">{stat.label}</p>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
-      </section>
+      </SectionShell>
 
-      {/* SERVICES */}
-      <section className="section-y bg-surface">
+      {/* Testimonials */}
+      <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="What we do"
-              title="Integrated services across the agri value chain."
-              description="From soil to market, from policy to practice — a single trusted partner."
-            />
-            <Button asChild variant="ghost" className="hidden md:inline-flex text-primary hover:text-primary-dark hover:bg-soft self-end">
-              <Link to="/services">All services <ArrowRight className="ml-1 size-4" /></Link>
-            </Button>
+          <ScrollReveal className="text-center mb-16 max-w-2xl mx-auto">
+            <span className="eyebrow">Testimonials</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
+              Trusted by governments, NGOs & investors
+            </h2>
+          </ScrollReveal>
+
+          <StaggerContainer className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((t, i) => (
+              <StaggerItem key={i}>
+                <GlassCard className="p-8 h-full bg-card">
+                  <Quote className="size-8 text-primary/30 mb-4" />
+                  <p className="text-foreground text-lg leading-relaxed mb-6">"{t.text}"</p>
+                  <div className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">{t.author}</span>
+                    {t.location && <span> · {t.location}</span>}
+                  </div>
+                </GlassCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </SectionShell>
+
+      {/* About preview */}
+      <SectionShell variant="soft" orbs>
+        <div className="container-px mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ScrollReveal>
+              <div className="relative">
+                <img src={aboutImg} alt="Hands holding rich soil" loading="lazy" className="rounded-3xl shadow-elegant w-full object-cover aspect-[4/3]" />
+                <GlassCard hover={false} className="absolute -bottom-6 -right-6 p-6 max-w-xs hidden md:block bg-primary text-white border-0">
+                  <Globe2 className="size-8 mb-2 text-primary-light" />
+                  <p className="text-sm">Active programs across <strong>12 African countries</strong></p>
+                </GlassCard>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={150}>
+              <span className="eyebrow">About AgriDevcor</span>
+              <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
+                Development expertise. Agricultural depth. Measurable impact.
+              </h2>
+              <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
+                For over a decade we've designed and delivered agricultural transformation programs
+                at every scale — from smallholder cooperatives to national irrigation strategies.
+              </p>
+              <div className="mt-8 space-y-4">
+                {[
+                  { icon: Shield, text: "Independent & evidence-based" },
+                  { icon: Users, text: "Multi-disciplinary expert teams" },
+                  { icon: Sun, text: "Climate & nature positive" },
+                ].map((item) => (
+                  <div key={item.text} className="flex items-center gap-3">
+                    <span className="grid size-10 place-items-center rounded-full bg-primary text-primary-foreground shadow-soft">
+                      <item.icon className="size-5" />
+                    </span>
+                    <span className="text-foreground font-medium">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <Button asChild size="lg" className="mt-8 rounded-full px-8">
+                <Link to="/about">Our Story <ArrowRight className="ml-2 size-4" /></Link>
+              </Button>
+            </ScrollReveal>
           </div>
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((s) => (
-              <article
-                key={s.title}
-                className="group rounded-2xl bg-card border border-border p-7 hover:border-primary/40 hover:shadow-elegant transition-all duration-300"
-              >
-                <span className="grid size-12 place-items-center rounded-xl bg-soft text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <s.icon className="size-6" />
-                </span>
-                <h3 className="mt-6 text-lg font-semibold text-foreground">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                <Link to="/services" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark">
-                  Learn more <ArrowRight className="size-3.5" />
+        </div>
+      </SectionShell>
+
+      {/* Products preview */}
+      <SectionShell orbs>
+        <div className="container-px mx-auto max-w-7xl">
+          <ScrollReveal className="text-center mb-16">
+            <span className="eyebrow">Products</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
+              Innovative solutions for modern agriculture
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { img: projIrrigation, tag: "Irrigation", title: "Smart Drip Network — Rift Valley", desc: "12,000 ha of horticulture under precision irrigation." },
+              { img: projClimate, tag: "Climate", title: "Solar-Powered Cold Chains", desc: "Off-grid storage for 38 smallholder cooperatives." },
+            ].map((product, index) => (
+              <ScrollReveal key={product.title} delay={index * 120}>
+                <Link to="/products" className="group block rounded-3xl overflow-hidden shadow-soft hover:shadow-elegant card-hover">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <img src={product.img} alt={product.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-transparent" />
+                    <span className="absolute top-4 left-4 rounded-full glass-light text-primary text-xs font-semibold px-4 py-1.5">{product.tag}</span>
+                    <div className="absolute bottom-0 p-8 text-white">
+                      <h3 className="text-xl font-bold mb-2">{product.title}</h3>
+                      <p className="text-white/85">{product.desc}</p>
+                    </div>
+                  </div>
                 </Link>
-              </article>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* FEATURED PRODUCTS */}
-      <section className="section-y">
-        <div className="container-px mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="Featured products"
-            title="Innovative solutions for modern agriculture."
-          />
-          <div className="mt-14 grid md:grid-cols-3 gap-6">
-            {products.map((p) => (
-              <Link
-                key={p.title}
-                to="/products"
-                className="group rounded-2xl overflow-hidden bg-card border border-border hover:shadow-elegant transition-all duration-300"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img src={p.img} alt={p.title} loading="lazy" width={1280} height={960} className="size-full object-cover group-hover:scale-[1.04] transition-transform duration-700" />
-                  <span className="absolute top-4 left-4 rounded-full bg-white/95 text-primary text-xs font-semibold px-3 py-1">{p.tag}</span>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Button asChild size="lg" variant="outline" className="rounded-full">
-              <Link to="/products">Browse all products <ArrowRight className="ml-1 size-4" /></Link>
+          <ScrollReveal delay={200} className="mt-12 text-center">
+            <Button asChild size="lg" variant="outline" className="rounded-full px-8">
+              <Link to="/products">Browse All Products <ArrowRight className="ml-2 size-4" /></Link>
             </Button>
-          </div>
+          </ScrollReveal>
         </div>
-      </section>
+      </SectionShell>
 
-      {/* TESTIMONIAL */}
-      <section className="section-y bg-primary-dark text-primary-foreground">
-        <div className="container-px mx-auto max-w-5xl text-center">
-          <Quote className="size-10 mx-auto opacity-50" />
-          <blockquote className="mt-6 text-2xl md:text-3xl font-display font-medium leading-snug">
-            "AgriDevcor designed the most rigorous and grounded irrigation feasibility we've ever
-            commissioned. Their team blends world-class technical depth with genuine field empathy."
-          </blockquote>
-          <div className="mt-8 text-sm text-white/70">
-            Director of Agriculture Programs · Regional Development Bank
-          </div>
+      {/* CTA */}
+      <SectionShell variant="dark">
+        <div className="container-px mx-auto max-w-4xl text-center">
+          <ScrollReveal>
+            <Leaf className="size-10 mx-auto text-primary-light mb-6" />
+            <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
+              Ready to transform your agricultural impact?
+            </h2>
+            <p className="mt-6 text-lg text-white/70 max-w-2xl mx-auto">
+              Partner with AgriDevcor to design climate-smart solutions that deliver
+              measurable results for communities and investors.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground px-8 font-bold hover:scale-[1.02] transition-all">
+                <Link to="/contact">Get Started <ArrowRight className="ml-2 size-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10 px-8">
+                <Link to="/about">Learn More</Link>
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
-      </section>
-
-      {/* INSIGHTS */}
-      <section className="section-y">
-        <div className="container-px mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <SectionHeading eyebrow="Latest insights" title="Thinking that shapes the field." />
-            <Button asChild variant="ghost" className="hidden md:inline-flex text-primary hover:text-primary-dark hover:bg-soft self-end">
-              <Link to="/insights">All insights <ArrowRight className="ml-1 size-4" /></Link>
-            </Button>
-          </div>
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {insights.map((i) => (
-              <Link key={i.title} to="/insights" className="group rounded-2xl border border-border p-7 hover:border-primary/40 hover:shadow-elegant transition-all bg-card">
-                <span className="text-xs font-semibold uppercase tracking-widest text-primary">{i.tag}</span>
-                <h3 className="mt-3 text-lg font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">{i.title}</h3>
-                <p className="mt-6 text-xs text-muted-foreground">{i.read}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      </SectionShell>
     </>
   );
 }

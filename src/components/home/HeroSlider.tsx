@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { FaSeedling, FaArrowRight } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Sprout, Globe2, BarChart3, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
+import { FloatingGlassCard } from "@/components/motion/GlassCard";
 import heroImg from "@/assets/hero-fields.jpg";
 import sorghum from "@/assets/sorgum.jpg";
 import climate from "@/assets/project-climate.jpg";
@@ -15,7 +18,7 @@ const slides = [
   { src: wateringMaize, alt: "Farmer watering maize plants" },
 ];
 
-const SLIDE_MS = 6500;
+const SLIDE_MS = 7000;
 
 export function HeroSlider() {
   const [idx, setIdx] = useState(0);
@@ -27,69 +30,145 @@ export function HeroSlider() {
 
   return (
     <section className="relative isolate min-h-[92vh] flex items-center overflow-hidden">
-
-      {/* Slides — Ken Burns */}
+      {/* Slides */}
       <div className="absolute inset-0">
-        {slides.map((s, i) => (
-          <img
-            key={s.src}
-            src={s.src}
-            alt={s.alt}
-            width={1920}
-            height={1280}
-            loading={i === 0 ? "eager" : "lazy"}
-            className={cn(
-              "absolute inset-0 size-full object-cover transition-opacity duration-[1400ms] ease-out will-change-transform",
-              i === idx ? "opacity-100 animate-ken-burns" : "opacity-0",
-            )}
-          />
-        ))}
+        <AnimatePresence mode="sync">
+          {slides.map((s, i) =>
+            i === idx ? (
+              <motion.img
+                key={s.src}
+                src={s.src}
+                alt={s.alt}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1.06 }}
+                exit={{ opacity: 0 }}
+                transition={{ opacity: { duration: 1.2 }, scale: { duration: 8, ease: "easeOut" } }}
+                className="absolute inset-0 size-full object-cover"
+              />
+            ) : null,
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* Gradient + vignette */}
-      <div className="absolute inset-0 bg-[linear-gradient(110deg,oklch(0.18_0.05_152/0.88)_0%,oklch(0.18_0.05_152/0.55)_55%,transparent_100%)]" />
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-[linear-gradient(110deg,oklch(0.12_0.04_152/0.92)_0%,oklch(0.15_0.05_152/0.6)_55%,oklch(0.12_0.04_152/0.35)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,oklch(0.1_0.05_152/0.55),transparent_60%)]" />
+      <div className="pointer-events-none absolute -bottom-32 -left-32 size-[480px] rounded-full bg-primary/25 blur-[100px] animate-blob" />
 
-      {/* Content */}
-      <div className="relative container-px mx-auto max-w-7xl pt-28 pb-20 md:pt-32 md:pb-28 text-white">
-        <div className="max-full max-w-6xl">
-          
-          {/* Badge */}
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-3 py-1 text-[10px] font-bold tracking-[0.12em] uppercase text-white/80 animate-fade-in">
-            <FaSeedling className="size-3 text-accent shrink-0" />
-            AgriDevcor · Growing a better tomorrow
-          </span>
+      <div className="relative container-px mx-auto max-w-7xl w-full pt-28 pb-24 md:pt-32 md:pb-28">
+        <div className="grid gap-12 lg:grid-cols-[1fr_400px] lg:items-center lg:gap-16">
+          {/* Left content */}
+          <div className="max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-md"
+            >
+              <Sprout className="size-3.5 text-accent" />
+              AgriDevcor · African Agritech Excellence
+            </motion.span>
 
-          {/* Headline */}
-          <h1 className="mt-5 font-serif text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-[1.08] tracking-tight animate-fade-up">
-            Growing a better tomorrow through{" "}
-            <em className="text-accent not-italic">sustainable agriculture</em>.
-          </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="mt-6 text-4xl font-bold leading-[1.06] tracking-tight text-white md:text-5xl lg:text-[3.4rem]"
+            >
+              Grow smarter.{" "}
+              <span className="text-primary-light">Feed the future.</span>
+            </motion.h1>
 
-          {/* Subtext */}
-          <p className="mt-5 text-sm md:text-base text-white/75 leading-relaxed animate-fade-up delay-100">
-            Empowering farmers, strengthening communities, advancing climate-smart
-            agriculture, and delivering innovative development solutions that create
-            lasting impact.
-          </p>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="mt-6 text-base leading-relaxed text-white/75 md:text-lg max-w-xl"
+            >
+              Empowering farmers, strengthening communities, and delivering climate-smart
+              agricultural solutions that create lasting impact across Africa.
+            </motion.p>
 
-          {/* CTAs */}
-          <div className="mt-8 flex flex-wrap items-center gap-3 animate-fade-up delay-200">
-            <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-10 px-6 text-sm font-bold">
-              <Link to="/services">
-                Explore our services <FaArrowRight className="ml-2 size-3" />
-              </Link>
-            </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-5 flex flex-wrap gap-2"
+            >
+              {["Climate-Smart", "Evidence-Based", "Farm-Gate Impact"].map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-white/15 bg-white/8 px-3 py-1 text-xs font-medium text-white/75 backdrop-blur-sm"
+                >
+                  {badge}
+                </span>
+              ))}
+            </motion.div>
 
-            <Button asChild size="lg" variant="outline" className="rounded-full border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white hover:border-white/50 h-10 px-6 text-sm font-semibold">
-              <Link to="/products">View Products</Link>
-            </Button>
-
-            <Button asChild size="lg" variant="ghost" className="text-white/70 hover:text-white hover:bg-transparent underline underline-offset-4 decoration-white/30 h-10 px-2 text-sm">
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground h-11 px-7 font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                <Link to="/services">
+                  Explore Services <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 bg-white/10 text-white hover:bg-white/20 h-11 px-7 font-semibold backdrop-blur-sm">
+                <Link to="/products">View Products</Link>
+              </Button>
+            </motion.div>
           </div>
 
+          {/* Floating stats card — HRX-inspired */}
+          <motion.div
+            initial={{ opacity: 0, x: 40, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:block animate-float"
+          >
+            <FloatingGlassCard className="p-7">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Field Pulse</p>
+                  <p className="mt-1 text-lg font-bold text-white">Live Impact</p>
+                </div>
+                <span className="flex items-center gap-2 rounded-full bg-primary-light/20 px-3 py-1 text-xs font-semibold text-primary-light">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-light opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-light" />
+                  </span>
+                  Active
+                </span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  { icon: BarChart3, value: 200, suffix: "+", label: "Projects" },
+                  { icon: Globe2, value: 12, suffix: "", label: "Countries" },
+                  { icon: Users, value: 50, suffix: "K+", label: "Farmers" },
+                ].map(({ icon: Icon, value, suffix, label }) => (
+                  <div key={label} className="rounded-2xl bg-white/5 border border-white/8 p-4 text-center">
+                    <Icon className="size-5 mx-auto text-primary-light mb-2" />
+                    <p className="text-2xl font-bold text-white">
+                      <AnimatedCounter value={value} suffix={suffix} />
+                    </p>
+                    <p className="text-[11px] text-white/50 mt-1">{label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                to="/about"
+                className="mt-6 flex items-center justify-between rounded-xl bg-white/5 border border-white/8 px-4 py-3 text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors group"
+              >
+                <span>Explore our track record</span>
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </FloatingGlassCard>
+          </motion.div>
         </div>
 
         {/* Slide dots */}
@@ -100,15 +179,13 @@ export function HeroSlider() {
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => setIdx(i)}
               className={cn(
-                "h-1.5 rounded-full transition-all",
-                i === idx ? "w-10 bg-white" : "w-5 bg-white/40 hover:bg-white/70",
+                "h-1.5 rounded-full transition-all duration-300",
+                i === idx ? "w-10 bg-white" : "w-5 bg-white/35 hover:bg-white/60",
               )}
             />
           ))}
         </div>
       </div>
-
     </section>
-    
   );
 }

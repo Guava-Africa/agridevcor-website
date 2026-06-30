@@ -1,7 +1,12 @@
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { Clock, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight, Droplets, Sun, Microscope, Sprout, Sparkles } from "lucide-react";
+import { PageHero } from "@/components/motion/PageHero";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
+import { GlassCard } from "@/components/motion/GlassCard";
+import { SectionShell } from "@/components/motion/SectionShell";
+import insightsImg from "@/images/insights.png";
 
 export const Route = createFileRoute("/insights")({
   head: () => ({
@@ -20,70 +25,78 @@ export const Route = createFileRoute("/insights")({
 type Tag = "All" | "Research" | "Sustainability" | "Innovation" | "Agriculture" | "Climate";
 
 const posts = [
-  { tag: "Sustainability" as const, title: "Five levers to decarbonize African agri-value chains", excerpt: "From regenerative cropping to logistics electrification, where carbon really lives in the chain.", read: "8 min" },
-  { tag: "Innovation" as const, title: "Why precision irrigation is the next frontier", excerpt: "Solar, IoT and smart valves are quietly reshaping what irrigation can deliver.", read: "6 min" },
-  { tag: "Climate" as const, title: "Designing climate finance that reaches the farm gate", excerpt: "Most climate dollars stall before the farmer. Here's how to fix that.", read: "10 min" },
-  { tag: "Research" as const, title: "What 9 maize varieties taught us about resilience", excerpt: "Lessons from a multi-year trial across 12 agro-ecological zones.", read: "7 min" },
-  { tag: "Agriculture" as const, title: "Cooperatives 2.0 — beyond aggregation", excerpt: "Modern cooperatives compete on data, finance and shared services.", read: "9 min" },
-  { tag: "Sustainability" as const, title: "Nature-positive isn't a buzzword. It's a balance sheet.", excerpt: "Pricing biodiversity into agri-business decisions.", read: "5 min" },
+  { tag: "Sustainability" as const, icon: Sprout, title: "Five levers to decarbonize African agri-value chains", excerpt: "From regenerative cropping to logistics electrification, where carbon really lives in the chain.", read: "8 min" },
+  { tag: "Innovation" as const, icon: Droplets, title: "Why precision irrigation is the next frontier", excerpt: "Solar, IoT and smart valves are reshaping what irrigation can deliver.", read: "6 min" },
+  { tag: "Climate" as const, icon: Sun, title: "Designing climate finance that reaches the farm gate", excerpt: "Most climate dollars stall before the farmer. Here's how to fix that.", read: "10 min" },
+  { tag: "Research" as const, icon: Microscope, title: "What 9 maize varieties taught us about resilience", excerpt: "Lessons from a multi-year trial across agro-ecological zones.", read: "7 min" },
+  { tag: "Agriculture" as const, icon: Sprout, title: "Cooperatives 2.0 — beyond aggregation", excerpt: "Modern cooperatives compete on data, finance and shared services.", read: "9 min" },
 ];
 
 const tags: Tag[] = ["All", "Research", "Sustainability", "Innovation", "Agriculture", "Climate"];
 
 function InsightsPage() {
   const [tag, setTag] = useState<Tag>("All");
-  const visible = useMemo(() => tag === "All" ? posts : posts.filter((p) => p.tag === tag), [tag]);
+  const visible = useMemo(() => (tag === "All" ? posts : posts.filter((p) => p.tag === tag)), [tag]);
 
   return (
     <>
-      <section className="bg-soft section-y">
-        <div className="container-px mx-auto max-w-5xl text-center">
-          <span className="eyebrow"><strong>Insights</strong></span>
-          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-foreground animate-fade-up">
-            Thinking from the field.
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Notes, briefs and research from our practitioners on the questions shaping the future of agriculture.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        image={insightsImg}
+        eyebrow="Insights"
+        title={<>Thinking from <span className="text-primary-light">the field.</span></>}
+        description="Research, innovation and practical knowledge shaping the future of agriculture — written by practitioners who work at the farm gate."
+        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Insights" }]}
+        badges={["Research", "Innovation", "Field Notes"]}
+      />
 
-      <section className="section-y">
+      <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {tags.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTag(t)}
-                className={cn(
-                  "rounded-full px-5 py-2 text-sm font-medium border transition-all",
-                  tag === t
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-card text-foreground/75 border-border hover:border-primary/40 hover:text-primary",
-                )}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+          <ScrollReveal>
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {tags.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTag(t)}
+                  className={cn(
+                    "rounded-full px-6 py-2 text-sm font-medium border transition-all duration-300",
+                    tag === t
+                      ? "bg-primary text-primary-foreground border-primary shadow-soft"
+                      : "bg-card text-muted-foreground border-border hover:border-primary hover:text-primary",
+                  )}
+                >
+                  {t === "All" ? t : (
+                    <span className="inline-flex items-center gap-1.5">
+                      {t === "Innovation" && <Sparkles className="size-3.5" />}
+                      {t}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
 
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {visible.map((p) => (
-              <article key={p.title} className="rounded-2xl border border-border bg-card p-8 hover:shadow-elegant hover:border-primary/40 transition-all flex flex-col">
-                <span className="text-xs font-semibold uppercase tracking-widest text-primary">{p.tag}</span>
-                <h3 className="mt-3 text-lg font-semibold text-foreground leading-snug">{p.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed flex-1">{p.excerpt}</p>
-                <div className="mt-6 flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="inline-flex items-center gap-1"><Clock className="size-3.5" /> {p.read}</span>
-                  <button className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark">
-                    Read more <ArrowRight className="size-3.5" />
-                  </button>
-                </div>
-              </article>
+              <StaggerItem key={p.title}>
+                <GlassCard className="group p-8 h-full flex flex-col bg-card">
+                  <div className="size-14 rounded-2xl bg-soft grid place-items-center text-primary group-hover:scale-110 transition-transform duration-300">
+                    <p.icon size={26} />
+                  </div>
+                  <span className="mt-6 block text-xs uppercase tracking-widest text-primary font-semibold">{p.tag}</span>
+                  <h3 className="mt-3 text-xl font-semibold">{p.title}</h3>
+                  <p className="mt-3 text-muted-foreground flex-grow leading-relaxed">{p.excerpt}</p>
+                  <div className="mt-6 flex justify-between items-center pt-4 border-t border-border">
+                    <span className="flex gap-2 text-sm text-muted-foreground"><Clock size={15} />{p.read}</span>
+                    <button className="text-primary font-semibold flex gap-1 items-center group-hover:gap-2 transition-all">
+                      Read more <ArrowRight size={15} />
+                    </button>
+                  </div>
+                </GlassCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
-      </section>
+      </SectionShell>
     </>
   );
 }
