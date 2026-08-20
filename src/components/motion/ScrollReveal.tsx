@@ -1,11 +1,10 @@
 import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { ease, reveal, transition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0 },
-};
+const variants: Variants = reveal;
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -22,13 +21,15 @@ export function ScrollReveal({
   once = true,
   amount = 0.15,
 }: ScrollRevealProps) {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial="hidden"
+      initial={reducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once, amount }}
       variants={variants}
-      transition={{ duration: 0.7, delay: delay / 1000, ease: [0.22, 1, 0.36, 1] }}
+      transition={transition(delay, reducedMotion)}
       className={cn(className)}
     >
       {children}
@@ -45,14 +46,16 @@ export function StaggerContainer({
   className?: string;
   stagger?: number;
 }) {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial="hidden"
+      initial={reducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: stagger } },
+        visible: { transition: { staggerChildren: reducedMotion ? 0 : stagger } },
       }}
       className={className}
     >
@@ -72,7 +75,7 @@ export function StaggerItem({
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 24 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: ease.premium } },
       }}
       className={className}
     >

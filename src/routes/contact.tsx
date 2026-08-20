@@ -3,9 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { FloatingInput } from "@/components/ds/FloatingInput";
 import { toast } from "sonner";
 import { PageHero } from "@/components/motion/PageHero";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
@@ -109,18 +107,14 @@ function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={onSubmit} noValidate className="grid sm:grid-cols-2 gap-5">
-                  <Field label="Name" name="name" error={errors.name} />
-                  <Field label="Email" name="email" type="email" error={errors.email} />
-                  <Field label="Phone" name="phone" type="tel" error={errors.phone} />
-                  <Field label="Organization" name="organization" error={errors.organization} />
-                  <Field label="Subject" name="subject" className="sm:col-span-2" error={errors.subject} />
+                  <FloatingInput label="Name" name="name" error={errors.name} required />
+                  <FloatingInput label="Email" name="email" type="email" error={errors.email} required />
+                  <FloatingInput label="Phone" name="phone" type="tel" error={errors.phone} />
+                  <FloatingInput label="Organization" name="organization" error={errors.organization} />
+                  <FloatingInput label="Subject" name="subject" className="sm:col-span-2" error={errors.subject} required />
+                  <FloatingInput label="Message" name="message" as="textarea" rows={6} className="sm:col-span-2" error={errors.message} required />
                   <div className="sm:col-span-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" rows={6} className="mt-2" aria-invalid={!!errors.message} />
-                    {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
-                  </div>
-                  <div className="sm:col-span-2">
-                    <Button type="submit" size="lg" className="rounded-full px-8 font-semibold">Send message</Button>
+                    <Button type="submit" size="lg" variant="premium" className="px-8">Send message</Button>
                   </div>
                 </form>
               )}
@@ -164,15 +158,5 @@ function ContactPage() {
         </div>
       </SectionShell>
     </>
-  );
-}
-
-function Field({ label, name, type = "text", error, className }: { label: string; name: string; type?: string; error?: string; className?: string }) {
-  return (
-    <div className={className}>
-      <Label htmlFor={name}>{label}</Label>
-      <Input id={name} name={name} type={type} className="mt-2" aria-invalid={!!error} />
-      {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
-    </div>
   );
 }

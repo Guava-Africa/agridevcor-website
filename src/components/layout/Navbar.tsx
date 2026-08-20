@@ -74,18 +74,27 @@ export function Navbar() {
                   to={item.to}
                   activeOptions={{ exact: item.to === "/" }}
                   className={cn(
-                    "relative px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                    "relative px-4 py-2 rounded-full text-sm font-medium transition-colors group",
                     solid
                       ? "text-foreground/75 hover:text-primary hover:bg-soft"
                       : "text-white/85 hover:text-white hover:bg-white/10",
                   )}
                   activeProps={{
-                    className: solid
-                      ? "text-primary bg-soft font-semibold"
-                      : "text-white bg-white/15 font-semibold",
+                    className: cn(
+                      solid
+                        ? "text-primary bg-soft font-semibold active"
+                        : "text-white bg-white/15 font-semibold active",
+                    ),
                   }}
                 >
                   {item.label}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100 [.active_&]:scale-x-100",
+                      solid ? "bg-primary" : "bg-white/80",
+                    )}
+                  />
                 </Link>
               </li>
             ))}

@@ -1,12 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Quote, Leaf, Tractor } from "lucide-react";
+import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Leaf, Tractor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroSlider } from "@/components/home/HeroSlider";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
 import { Marquee } from "@/components/motion/Marquee";
-import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
+import { SectionHeading } from "@/components/ui/section-heading";
+import {
+  CTASection,
+  FeatureCard,
+  StatCardGrid,
+  TestimonialCard,
+  ProductCard,
+} from "@/components/ds";
 import aboutImg from "@/assets/about-soil.jpg";
 import projIrrigation from "@/assets/project-irrigation.jpg";
 import projClimate from "@/assets/project-climate.jpg";
@@ -65,15 +72,13 @@ function Home() {
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-4xl text-center">
           <ScrollReveal>
-            <span className="eyebrow">Our Mission</span>
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-foreground text-balance">
-              Grow a better tomorrow. <span className="gradient-text">Change lives.</span>
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Agricultural transformation is hard. Getting expert support doesn't need to be.
-              We put sustainable farming solutions in your hands, with proven strategies
-              to increase yield, build resilience, and create lasting impact for communities.
-            </p>
+            <SectionHeading
+              eyebrow="Our Mission"
+              title={<>Grow a better tomorrow. <span className="gradient-text">Change lives.</span></>}
+              description="Agricultural transformation is hard. Getting expert support doesn't need to be. We put sustainable farming solutions in your hands, with proven strategies to increase yield, build resilience, and create lasting impact for communities."
+              align="center"
+              className="mx-auto max-w-3xl [&_h2]:text-balance"
+            />
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="rounded-full px-8 font-semibold shadow-soft hover:shadow-elegant hover:scale-[1.02] transition-all">
                 <Link to="/contact">Start Your Journey <ArrowRight className="ml-2 size-4" /></Link>
@@ -90,28 +95,25 @@ function Home() {
       <SectionShell variant="gradient" orbs>
         <div className="container-px mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="eyebrow">What We Do</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
-              Transform agriculture at every scale
-            </h2>
-            <p className="mt-4 text-muted-foreground text-lg">
-              Integrated expertise across climate, water, markets and capacity building.
-            </p>
+            <SectionHeading
+              eyebrow="What We Do"
+              title="Transform agriculture at every scale"
+              description="Integrated expertise across climate, water, markets and capacity building."
+              align="center"
+              className="mx-auto"
+            />
           </ScrollReveal>
 
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <StaggerItem key={service.title}>
-                <GlassCard className={`group p-8 bg-gradient-to-br ${service.color} text-white border-0 h-full`} dark>
-                  <div className="size-14 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <service.icon className="size-7" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-white/85 leading-relaxed mb-6">{service.desc}</p>
-                  <Link to="/services" className="inline-flex items-center text-sm font-semibold text-white/90 hover:text-white transition-colors">
-                    Learn More <ArrowRight className="ml-2 size-4" />
-                  </Link>
-                </GlassCard>
+                <FeatureCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.desc}
+                  href="/services"
+                  gradient={service.color}
+                />
               </StaggerItem>
             ))}
           </StaggerContainer>
@@ -121,21 +123,15 @@ function Home() {
       {/* Impact stats */}
       <SectionShell variant="dark">
         <div className="container-px mx-auto max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
+          <StatCardGrid
+            stats={[
               { value: 200, suffix: "+", label: "Projects Delivered" },
               { value: 12, suffix: "", label: "African Countries" },
               { value: 15, suffix: "+", label: "Years of Excellence" },
               { value: 50, suffix: "K+", label: "Farmers Reached" },
-            ].map((stat, i) => (
-              <ScrollReveal key={stat.label} delay={i * 80}>
-                <p className="text-4xl md:text-5xl font-bold text-primary-light">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                </p>
-                <p className="mt-2 text-sm text-white/60 uppercase tracking-wider">{stat.label}</p>
-              </ScrollReveal>
-            ))}
-          </div>
+            ]}
+            variant="dark"
+          />
         </div>
       </SectionShell>
 
@@ -143,23 +139,18 @@ function Home() {
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16 max-w-2xl mx-auto">
-            <span className="eyebrow">Testimonials</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
-              Trusted by governments, NGOs & investors
-            </h2>
+            <SectionHeading
+              eyebrow="Testimonials"
+              title="Trusted by governments, NGOs & investors"
+              align="center"
+              className="mx-auto"
+            />
           </ScrollReveal>
 
           <StaggerContainer className="grid md:grid-cols-2 gap-6">
             {testimonials.map((t, i) => (
               <StaggerItem key={i}>
-                <GlassCard className="p-8 h-full bg-card">
-                  <Quote className="size-8 text-primary/30 mb-4" />
-                  <p className="text-foreground text-lg leading-relaxed mb-6">"{t.text}"</p>
-                  <div className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">{t.author}</span>
-                    {t.location && <span> · {t.location}</span>}
-                  </div>
-                </GlassCard>
+                <TestimonialCard text={t.text} author={t.author} location={t.location} />
               </StaggerItem>
             ))}
           </StaggerContainer>
@@ -215,10 +206,12 @@ function Home() {
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16">
-            <span className="eyebrow">Products</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-foreground">
-              Innovative solutions for modern agriculture
-            </h2>
+            <SectionHeading
+              eyebrow="Products"
+              title="Innovative solutions for modern agriculture"
+              align="center"
+              className="mx-auto"
+            />
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -227,17 +220,12 @@ function Home() {
               { img: projClimate, tag: "Climate", title: "Solar-Powered Cold Chains", desc: "Off-grid storage for 38 smallholder cooperatives." },
             ].map((product, index) => (
               <ScrollReveal key={product.title} delay={index * 120}>
-                <Link to="/products" className="group block rounded-3xl overflow-hidden shadow-soft hover:shadow-elegant card-hover">
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <img src={product.img} alt={product.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-transparent" />
-                    <span className="absolute top-4 left-4 rounded-full glass-light text-primary text-xs font-semibold px-4 py-1.5">{product.tag}</span>
-                    <div className="absolute bottom-0 p-8 text-white">
-                      <h3 className="text-xl font-bold mb-2">{product.title}</h3>
-                      <p className="text-white/85">{product.desc}</p>
-                    </div>
-                  </div>
-                </Link>
+                <ProductCard
+                  image={product.img}
+                  title={product.title}
+                  description={product.desc}
+                  tag={product.tag}
+                />
               </ScrollReveal>
             ))}
           </div>
@@ -250,29 +238,15 @@ function Home() {
         </div>
       </SectionShell>
 
-      {/* CTA */}
-      <SectionShell variant="dark">
-        <div className="container-px mx-auto max-w-4xl text-center">
-          <ScrollReveal>
-            <Leaf className="size-10 mx-auto text-primary-light mb-6" />
-            <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
-              Ready to transform your agricultural impact?
-            </h2>
-            <p className="mt-6 text-lg text-white/70 max-w-2xl mx-auto">
-              Partner with AgriDevcor to design climate-smart solutions that deliver
-              measurable results for communities and investors.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="rounded-full bg-accent hover:bg-accent/90 text-accent-foreground px-8 font-bold hover:scale-[1.02] transition-all">
-                <Link to="/contact">Get Started <ArrowRight className="ml-2 size-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10 px-8">
-                <Link to="/about">Learn More</Link>
-              </Button>
-            </div>
-          </ScrollReveal>
-        </div>
-      </SectionShell>
+      <CTASection
+        icon={Leaf}
+        title="Ready to transform your agricultural impact?"
+        description="Partner with AgriDevcor to design climate-smart solutions that deliver measurable results for communities and investors."
+        actions={[
+          { label: "Get Started", to: "/contact" },
+          { label: "Learn More", to: "/about", variant: "outline" },
+        ]}
+      />
     </>
   );
 }

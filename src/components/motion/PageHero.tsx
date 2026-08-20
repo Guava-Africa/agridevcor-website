@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ChevronRight, ArrowRight } from "lucide-react";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode, type MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 export interface HeroCta {
@@ -43,10 +44,28 @@ export function PageHero({
   className,
   minHeight = "min-h-[75vh]",
 }: PageHeroProps) {
+  const reducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 80, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 80, damping: 20 });
+  const parallaxX = useTransform(springX, [-0.5, 0.5], [-12, 12]);
+  const parallaxY = useTransform(springY, [-0.5, 0.5], [-8, 8]);
+
+  function handleMouseMove(e: MouseEvent) {
+    if (reducedMotion || !sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+
   return (
     <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className={cn(
-        "relative isolate flex items-center overflow-hidden",
+        "relative isolate flex items-center overflow-hidden grain",
         minHeight,
         className,
       )}
@@ -67,13 +86,28 @@ export function PageHero({
           <motion.img
             src={image}
             alt=""
-            initial={{ scale: 1.08 }}
+            initial={{ scale: reducedMotion ? 1 : 1.08 }}
             animate={{ scale: 1 }}
+            style={reducedMotion ? undefined : { x: parallaxX, y: parallaxY }}
             transition={{ duration: 12, ease: "easeOut" }}
             className="size-full object-cover animate-ken-burns"
           />
         )}
       </div>
+
+      {/* Decorative SVG curves */}
+      <svg
+        className="pointer-events-none absolute bottom-0 left-0 w-full text-background/10"
+        viewBox="0 0 1440 120"
+        fill="none"
+        aria-hidden
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+          fill="currentColor"
+        />
+      </svg>
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-[linear-gradient(110deg,oklch(0.12_0.04_152/0.92)_0%,oklch(0.15_0.05_152/0.65)_50%,oklch(0.12_0.04_152/0.4)_100%)]" />

@@ -26,11 +26,13 @@ export function AnimatedCounter({
     let frame: number;
     const startTime = performance.now();
     const ms = duration * 1000;
+    const isDecimal = !Number.isInteger(value);
 
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / ms, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * value));
+      const current = eased * value;
+      setCount(isDecimal ? Math.round(current * 10) / 10 : Math.floor(current));
       if (progress < 1) frame = requestAnimationFrame(tick);
       else setCount(value);
     };

@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 interface Props {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   description?: string;
   align?: "left" | "center";
   className?: string;

@@ -108,6 +108,24 @@ export const Route = createRootRouteWithContext<{
       {
         title: "AgriDevcor — Agricultural Development & Sustainability",
       },
+      {
+        name: "description",
+        content:
+          "Premium agricultural consulting in climate-smart farming, irrigation, agribusiness and rural development across Africa.",
+      },
+      { property: "og:site_name", content: "AgriDevcor" },
+      { property: "og:type", content: "website" },
+      {
+        property: "og:title",
+        content: "AgriDevcor — Agricultural Development & Sustainability",
+      },
+      {
+        property: "og:description",
+        content:
+          "Premium agricultural consulting in climate-smart farming, irrigation, agribusiness and rural development across Africa.",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#166534" },
     ],
     links: [
       { rel: "icon", type: "image/png", href: logoAsset.url },
@@ -117,6 +135,31 @@ export const Route = createRootRouteWithContext<{
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "AgriDevcor",
+          url: "https://agridevcor.com",
+          logo: logoAsset.url,
+          description:
+            "Agricultural development and sustainability consulting across Africa.",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Harare",
+            addressCountry: "ZW",
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+263-242-257156",
+            contactType: "customer service",
+            email: "info@agridevcor.com",
+          },
+        }),
       },
     ],
   }),
