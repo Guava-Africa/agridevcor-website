@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e8eee3"/><stop offset="1" stop-color="#bdcdb7"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="22" stdDeviation="18" flood-opacity=".15"/></filter></defs>
+<rect width="1200" height="900" fill="url(#bg)"/>
+<g transform="translate(135 145) rotate(-5 465 300)" filter="url(#shadow)">
+<path d="M0 42Q230-10 465 55Q695-10 930 42V615Q700 570 465 630Q230 570 0 615Z" fill="#1c5239"/>
+<path d="M22 20Q230-30 465 40Q700-30 908 20V575Q700 530 465 600Q230 530 22 575Z" fill="#fffdf4"/>
+<path d="M465 40V600" stroke="#d7d4c5" stroke-width="5"/>
+<g fill="#1c5239" font-family="Arial,sans-serif"><text x="70" y="100" font-size="16" letter-spacing="3">CROP PRODUCTION</text><text x="70" y="145" font-size="32" font-weight="700">Field guide</text></g>
+<g stroke="#d2d6c9" stroke-width="8" stroke-linecap="round"><path d="M72 190H388M72 215H365M72 240H380M72 470H385M72 497H355M72 524H382M530 95H852M530 123H822M530 151H845M530 470H852M530 498H825M530 526H845"/></g>
+<g stroke="#3e754c" stroke-width="7" fill="none" stroke-linecap="round"><path d="M227 420V300M227 370Q155 370 155 310Q222 307 227 370M227 340Q292 340 300 280Q235 284 227 340"/></g>
+<rect x="535" y="210" width="310" height="215" rx="8" fill="#edf1df"/>
+<g stroke="#76915e" stroke-width="8"><path d="M560 400L675 230M625 408L740 238M690 416L805 246"/></g>
+<g fill="#3e754c"><ellipse cx="590" cy="354" rx="18" ry="9" transform="rotate(-55 590 354)"/><ellipse cx="625" cy="300" rx="18" ry="9" transform="rotate(-55 625 300)"/><ellipse cx="692" cy="310" rx="18" ry="9" transform="rotate(-55 692 310)"/><ellipse cx="752" cy="326" rx="18" ry="9" transform="rotate(-55 752 326)"/></g></g></svg>

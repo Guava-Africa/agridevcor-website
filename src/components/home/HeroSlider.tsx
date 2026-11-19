@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Sprout, Globe2, BarChart3, Users } from "lucide-react";
+import { ArrowRight, Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
-import { FloatingGlassCard } from "@/components/motion/GlassCard";
 import heroImg from "@/assets/hero-fields.jpg";
 import sorghum from "@/assets/sorgum.jpg";
 import climate from "@/assets/project-climate.jpg";
 import wateringMaize from "@/assets/man watering maize plants.jpg";
+import farmingCommunity from "@/assets/women in tomatoe field.jpg";
+import tomatoes from "@/assets/two hands holding 2 tomatoes.jpg";
 import { cn } from "@/lib/utils";
 
 const slides = [
   { src: heroImg, alt: "Aerial view of green terraced farmland" },
-  { src: sorghum, alt: "Sorghum field in full bloom" },
+  { src: sorghum, alt: "Cereal crop field" },
   { src: climate, alt: "Climate-smart agriculture in practice" },
   { src: wateringMaize, alt: "Farmer watering maize plants" },
 ];
@@ -122,52 +122,14 @@ export function HeroSlider() {
             </motion.div>
           </div>
 
-          {/* Floating stats card — HRX-inspired */}
           <motion.div
-            initial={{ opacity: 0, x: 40, y: 20 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block animate-float"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="relative mx-auto w-full max-w-md pb-8 pr-8"
           >
-            <FloatingGlassCard className="p-7">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Field Pulse</p>
-                  <p className="mt-1 text-lg font-bold text-white">Live Impact</p>
-                </div>
-                <span className="flex items-center gap-2 rounded-full bg-primary-light/20 px-3 py-1 text-xs font-semibold text-primary-light">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-light opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-light" />
-                  </span>
-                  Active
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { icon: BarChart3, value: 200, suffix: "+", label: "Projects" },
-                  { icon: Globe2, value: 12, suffix: "", label: "Countries" },
-                  { icon: Users, value: 50, suffix: "K+", label: "Farmers" },
-                ].map(({ icon: Icon, value, suffix, label }) => (
-                  <div key={label} className="rounded-2xl bg-white/5 border border-white/8 p-4 text-center">
-                    <Icon className="size-5 mx-auto text-primary-light mb-2" />
-                    <p className="text-2xl font-bold text-white">
-                      <AnimatedCounter value={value} suffix={suffix} />
-                    </p>
-                    <p className="text-[11px] text-white/50 mt-1">{label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                to="/about"
-                className="mt-6 flex items-center justify-between rounded-xl bg-white/5 border border-white/8 px-4 py-3 text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors group"
-              >
-                <span>Explore our track record</span>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </FloatingGlassCard>
+            <img src={farmingCommunity} alt="Women working together in a tomato field" className="aspect-[4/5] max-h-[420px] w-full rounded-3xl object-cover shadow-2xl" />
+            <img src={tomatoes} alt="Freshly harvested tomatoes held in a farmer's hands" className="absolute bottom-0 right-0 aspect-square w-2/5 rounded-2xl border-4 border-primary-dark object-cover shadow-xl" />
           </motion.div>
         </div>
 

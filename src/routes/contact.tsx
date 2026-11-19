@@ -1,22 +1,18 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
-import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { FloatingInput } from "@/components/ds/FloatingInput";
-import { toast } from "sonner";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { PageHero } from "@/components/motion/PageHero";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
 import { FloatingGlassCard } from "@/components/motion/GlassCard";
+import farmingCommunity from "@/assets/women in tomatoe field.jpg";
 import heroFields from "@/assets/hero-fields.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact AgriDevcor — Start a conversation" },
-      { name: "description", content: "Get in touch with AgriDevcor. We respond within two working days." },
+      { name: "description", content: "Get in touch with AgriDevcor by email or phone, or visit our Harare office." },
       { property: "og:title", content: "Contact AgriDevcor" },
       { property: "og:description", content: "Reach our team to discuss programs, partnerships or proposals." },
       { property: "og:url", content: "/contact" },
@@ -26,49 +22,20 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const schema = z.object({
-  name: z.string().trim().min(1, "Required").max(100),
-  email: z.string().trim().email("Invalid email").max(255),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
-  organization: z.string().trim().max(120).optional().or(z.literal("")),
-  subject: z.string().trim().min(1, "Required").max(160),
-  message: z.string().trim().min(10, "Tell us a bit more").max(2000),
-});
-
 const offices = [
   { city: "Harare", role: "Headquarters", addr: "55 Lawley Avenue Belvedere Harare, Zimbabwe" },
 ];
 
 function ContactPage() {
-  const [sent, setSent] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    const result = schema.safeParse(data);
-    if (!result.success) {
-      const errs: Record<string, string> = {};
-      for (const issue of result.error.issues) errs[issue.path[0] as string] = issue.message;
-      setErrors(errs);
-      toast.error("Please review the form");
-      return;
-    }
-    setErrors({});
-    setSent(true);
-    toast.success("Message sent — we'll be in touch shortly.");
-    e.currentTarget.reset();
-  }
-
   return (
     <>
       <PageHero
         image={heroFields}
         eyebrow="Contact Us"
         title={<>Let's <span className="text-primary-light">talk.</span></>}
-        description="Programs, partnerships, proposals — share a few details and our team will respond within two working days."
+        description="Contact our team by email or phone to discuss programs, partnerships and proposals."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "Contact" }]}
-        badges={["2-Day Response", "Harare HQ", "Global Reach"]}
+        badges={["Harare HQ", "Agricultural Development"]}
         floatingCard={
           <FloatingGlassCard>
             <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-4">Direct Lines</p>
@@ -97,28 +64,7 @@ function ContactPage() {
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl grid lg:grid-cols-[1.3fr_1fr] gap-10">
           <ScrollReveal>
-            <GlassCard className="p-8 md:p-10 bg-card">
-              {sent ? (
-                <div className="text-center py-10">
-                  <CheckCircle2 className="size-14 text-primary mx-auto" />
-                  <h2 className="mt-4 text-2xl font-bold">Thank you.</h2>
-                  <p className="mt-2 text-muted-foreground">Your message is on its way. We'll be in touch shortly.</p>
-                  <Button className="mt-6 rounded-full" onClick={() => setSent(false)}>Send another</Button>
-                </div>
-              ) : (
-                <form onSubmit={onSubmit} noValidate className="grid sm:grid-cols-2 gap-5">
-                  <FloatingInput label="Name" name="name" error={errors.name} required />
-                  <FloatingInput label="Email" name="email" type="email" error={errors.email} required />
-                  <FloatingInput label="Phone" name="phone" type="tel" error={errors.phone} />
-                  <FloatingInput label="Organization" name="organization" error={errors.organization} />
-                  <FloatingInput label="Subject" name="subject" className="sm:col-span-2" error={errors.subject} required />
-                  <FloatingInput label="Message" name="message" as="textarea" rows={6} className="sm:col-span-2" error={errors.message} required />
-                  <div className="sm:col-span-2">
-                    <Button type="submit" size="lg" variant="premium" className="px-8">Send message</Button>
-                  </div>
-                </form>
-              )}
-            </GlassCard>
+            <img src={farmingCommunity} alt="Women tending crops in a tomato field" loading="lazy" className="h-full min-h-80 max-h-[620px] w-full rounded-3xl object-cover shadow-elegant" />
           </ScrollReveal>
 
           <div className="space-y-6">

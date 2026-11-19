@@ -18,20 +18,20 @@ import { PageHero } from "@/components/motion/PageHero";
 import { SectionShell } from "@/components/motion/SectionShell";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { GlassCard } from "@/components/motion/GlassCard";
-import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
 import {
   Timeline,
   type TimelineStep,
   CTASection,
   FAQ,
   ImageBanner,
-  StatCardGrid,
   SectionDivider,
 } from "@/components/ds";
 import { SectionHeading } from "@/components/ui/section-heading";
 import heroFields from "@/assets/hero-fields.jpg";
-import womenTomatoes from "@/assets/women in tomatoe field.jpg";
-import sweetPotatoes from "@/assets/harvesting sweet potatoes.jpg";
+import peaBean from "@/assets/michigan-pea-bean.jpg";
+import redSorghum from "@/assets/red-sorghum.jpg";
+import farmingCommunity from "@/assets/women in tomatoe field.jpg";
+import wateringCrops from "@/assets/man watering maize plants.jpg";
 import popcornSacks from "@/assets/popcorns in sacks.jpg";
 
 export const Route = createFileRoute("/community-farming")({
@@ -64,7 +64,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Cooperatives and individual smallholders enrol through structured onboarding — capturing farm profiles, land tenure, crop preferences, and household demographics to build a tailored support plan.",
     icon: UserPlus,
-    stat: "12,000+ farmers registered",
   },
   {
     id: "assessment",
@@ -72,7 +71,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Field teams conduct soil testing, water availability surveys, and baseline yield assessments. Each farm receives a diagnostic report with prioritized interventions.",
     icon: ClipboardCheck,
-    stat: "100% baseline coverage",
   },
   {
     id: "training",
@@ -80,7 +78,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Farmer field schools deliver hands-on training in climate-smart practices, integrated pest management, and post-harvest handling — building skills that persist beyond the project lifecycle.",
     icon: GraduationCap,
-    stat: "850+ training sessions delivered",
   },
   {
     id: "inputs",
@@ -88,7 +85,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Certified seed, fertilizer, and tools are distributed through cooperative structures with transparent tracking — ensuring inputs reach the farmers who need them most.",
     icon: Package,
-    stat: "Fair-price input access",
   },
   {
     id: "planting",
@@ -96,7 +92,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Extension officers guide planting calendars, spacing, and varietal selection aligned to local agro-ecological zones — maximizing germination and early crop establishment.",
     icon: Sprout,
-    stat: "Climate-aligned calendars",
   },
   {
     id: "monitoring",
@@ -104,7 +99,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Regular field visits, digital check-ins, and crop health assessments track progress against milestones. Early warning systems flag pest outbreaks and weather risks.",
     icon: Eye,
-    stat: "Real-time field monitoring",
   },
   {
     id: "harvest",
@@ -112,7 +106,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Harvest protocols ensure quality grading at source. Cooperatives coordinate collection points and logistics to minimize post-harvest losses during peak season.",
     icon: Wheat,
-    stat: "40% loss reduction achieved",
   },
   {
     id: "processing",
@@ -120,7 +113,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Value-add facilities — drying, sorting, and packaging — transform raw produce into market-ready products, capturing more value within the community.",
     icon: Factory,
-    stat: "18 processing hubs active",
   },
   {
     id: "market",
@@ -128,7 +120,6 @@ const journeySteps: TimelineStep[] = [
     description:
       "Buyer linkages, contract farming arrangements, and export certifications connect cooperatives to premium markets — from local retailers to international buyers.",
     icon: Store,
-    stat: "Premium buyer network",
   },
   {
     id: "payment",
@@ -136,15 +127,7 @@ const journeySteps: TimelineStep[] = [
     description:
       "Transparent payment systems — mobile money and cooperative accounts — ensure farmers receive fair prices promptly, with full traceability from field to final sale.",
     icon: Wallet,
-    stat: "Same-season payment cycles",
   },
-];
-
-const impactStats = [
-  { value: 50, suffix: "K+", label: "Farmers Supported" },
-  { value: 38, suffix: "", label: "Active Cooperatives" },
-  { value: 2.4, suffix: "×", label: "Average Yield Increase" },
-  { value: 85, suffix: "%", label: "Women Participation" },
 ];
 
 const faqItems = [
@@ -156,7 +139,7 @@ const faqItems = [
   {
     question: "How long does the full journey take?",
     answer:
-      "A complete crop cycle typically spans 6–12 months depending on the crop. Training and input support begin immediately after registration and assessment.",
+      "The crop cycle varies with the crop and local growing conditions. Training and input support begin immediately after registration and assessment.",
   },
   {
     question: "Is there a cost to farmers?",
@@ -192,15 +175,6 @@ function CommunityFarmingPage() {
           { label: "Partner With Us", to: "/contact", variant: "primary" },
           { label: "View Products", to: "/products", variant: "outline" },
         ]}
-        floatingCard={
-          <GlassCard hover={false} className="p-6 bg-black/40 border-white/15 text-white">
-            <Users className="size-8 text-primary-light mb-3" />
-            <p className="text-3xl font-bold">
-              <AnimatedCounter value={50} suffix="K+" />
-            </p>
-            <p className="text-sm text-white/70 mt-1">Farmers in active community programs</p>
-          </GlassCard>
-        }
       />
 
       {/* Intro */}
@@ -214,17 +188,18 @@ function CommunityFarmingPage() {
               align="center"
             />
           </ScrollReveal>
+          <div className="mt-10 grid sm:grid-cols-2 gap-6">
+            <ScrollReveal>
+              <img src={farmingCommunity} alt="Women working in a community tomato field" loading="lazy" className="aspect-[16/10] w-full rounded-3xl object-cover shadow-soft" />
+            </ScrollReveal>
+            <ScrollReveal delay={120}>
+              <img src={wateringCrops} alt="Farmer irrigating maize plants" loading="lazy" className="aspect-[16/10] w-full rounded-3xl object-cover shadow-soft" />
+            </ScrollReveal>
+          </div>
         </div>
       </SectionShell>
 
       <SectionDivider variant="line" />
-
-      {/* Impact stats */}
-      <SectionShell variant="dark">
-        <div className="container-px mx-auto max-w-7xl">
-          <StatCardGrid stats={impactStats} variant="dark" />
-        </div>
-      </SectionShell>
 
       {/* Journey timeline */}
       <SectionShell variant="gradient" orbs id="journey">
@@ -246,20 +221,20 @@ function CommunityFarmingPage() {
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl space-y-24">
           <ImageBanner
-            image={womenTomatoes}
-            alt="Women farmers harvesting tomatoes in a cooperative field"
-            eyebrow="Women-Led Production"
-            title="Empowering women as agricultural leaders"
-            description="Our women-led tomato production programs put decision-making power in the hands of female farmers — with dedicated training, input access, and direct market linkages that increase household income by an average of 60%."
+            image={peaBean}
+            alt="Dry white pea beans representing the crop grown under Project Kunaka"
+            eyebrow="Project 1"
+            title="Project Kunaka"
+            description="National Climate Resilient Irrigation Scale-up for Michigan Pea Beans."
             align="left"
           />
 
           <ImageBanner
-            image={sweetPotatoes}
-            alt="Farmers harvesting sweet potatoes"
-            eyebrow="Smallholder Empowerment"
-            title="Building resilience at the farm level"
-            description="Through structured support from registration to payment, smallholder farmers gain the skills, inputs, and market connections needed to move from subsistence to sustainable commercial production."
+            image={redSorghum}
+            alt="Harvested red sorghum grains representing the crop grown under Project Nyathi"
+            eyebrow="Project 2"
+            title="Project Nyathi"
+            description="National Climate Smart Drought Tolerant Scale-up for Red Sorghum."
             align="right"
           />
 

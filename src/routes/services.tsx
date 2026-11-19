@@ -6,13 +6,19 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion
 import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
 import { FloatingGlassCard } from "@/components/motion/GlassCard";
+import farmerImg from "@/assets/woman in field.jpg";
+import farmingCommunity from "@/assets/women in tomatoe field.jpg";
+import harvestImg from "@/assets/popcorns in sacks.jpg";
+import irrigationImg from "@/assets/man watering maize plants.jpg";
+import seedPotato from "@/assets/seed-potato.jpg";
+import { PhotoCredit } from "@/components/ds/PhotoCredit";
 import heroFields from "@/assets/hero-fields.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — AgriDevcor" },
-      { name: "description", content: "Consulting in climate-smart agriculture, irrigation, farm development, training, agribusiness support, monitoring and evaluation." },
+      { name: "description", content: "Advisory and consultancy, training and capacity building, value chain development, climate smart technologies, seed potato certification, and monitoring and evaluation." },
       { property: "og:title", content: "Services — AgriDevcor" },
       { property: "og:description", content: "Integrated agricultural and sustainability services." },
       { property: "og:url", content: "/services" },
@@ -23,14 +29,12 @@ export const Route = createFileRoute("/services")({
 });
 
 const services = [
-  { icon: Sprout, title: "Agricultural Consultancy", desc: "Strategy, technical assistance and program design for ministries, donors and agri-corporates.", outcomes: ["Sector strategies", "Feasibility studies", "Policy briefs"] },
-  { icon: Tractor, title: "Farm Development", desc: "Greenfield and brownfield farm design — from soil and water assessment to operations setup.", outcomes: ["Master plans", "CapEx models", "Operations playbooks"] },
-  { icon: Sun, title: "Climate-Smart Agriculture", desc: "Regenerative practices, agroforestry, carbon and nature-positive cropping systems.", outcomes: ["CSA roadmaps", "Carbon baselines", "Adaptation plans"] },
-  { icon: Droplets, title: "Irrigation Solutions", desc: "Drip, sprinkler and pivot systems with solar-powered pumping and IoT controls.", outcomes: ["Hydraulic design", "BOQ & supervision", "Performance audits"] },
-  { icon: GraduationCap, title: "Training Programs", desc: "Farmer field schools, extension training-of-trainers and curriculum development.", outcomes: ["Curricula", "ToT delivery", "Digital learning"] },
-  { icon: BarChart3, title: "Agribusiness Support", desc: "Market entry, value chain analysis, investor due diligence and offtake structuring.", outcomes: ["Market studies", "Investor decks", "Offtake design"] },
-  { icon: Microscope, title: "Sustainability Services", desc: "ESG, biodiversity, water stewardship and supply chain decarbonization.", outcomes: ["ESG audits", "Net-zero roadmaps", "Biodiversity plans"] },
-  { icon: LineChart, title: "Monitoring & Evaluation", desc: "Theory of change, MEAL frameworks, baselines, midline and endline studies.", outcomes: ["MEAL design", "Impact studies", "Independent verification"] },
+  { icon: Sprout, title: "Advisory and Consultancy", image: farmerImg, alt: "Farmer standing in a crop field", desc: "Strategy, technical assistance and program design for ministries, donors and agri-corporates.", outcomes: ["Sector strategies", "Feasibility studies", "Policy briefs"] },
+  { icon: GraduationCap, title: "Training and Capacity Building", image: farmingCommunity, alt: "Women working together in a tomato field", desc: "Farmer field schools, extension training-of-trainers and curriculum development.", outcomes: ["Curricula", "ToT delivery", "Digital learning"] },
+  { icon: BarChart3, title: "Value Chain Development", image: harvestImg, alt: "Harvested popcorn stored in sacks", desc: "Market entry, value chain analysis, investor due diligence and offtake structuring.", outcomes: ["Market studies", "Investor decks", "Offtake design"] },
+  { icon: Sun, title: "Climate Smart Technologies", image: irrigationImg, alt: "Farmer watering maize plants", desc: "Drip, sprinkler and pivot systems with solar-powered pumping and IoT controls.", outcomes: ["Hydraulic design", "BOQ & supervision", "Performance audits"] },
+  { icon: Microscope, title: "Seed Potato Certification", image: seedPotato, alt: "Sprouted seed potatoes ready for planting", desc: "Seed potato certification.", outcomes: [] },
+  { icon: LineChart, title: "M&E (Monitoring and Evaluation)", image: heroFields, alt: "Aerial view of cultivated farmland", desc: "Theory of change, MEAL frameworks, baselines, midline and endline studies.", outcomes: ["MEAL design", "Impact studies", "Independent verification"] },
 ];
 
 function ServicesPage() {
@@ -39,8 +43,8 @@ function ServicesPage() {
       <PageHero
         image={heroFields}
         eyebrow="Our Services"
-        title={<>Eight practice areas. <span className="text-primary-light">One integrated team.</span></>}
-        description="We work across the agricultural value chain — pairing technical specialists with development economists, ecologists and engineers to solve complex problems end-to-end."
+        title={<>Six practice areas. <span className="text-primary-light">One integrated team.</span></>}
+        description="We drive success across the agricultural value chain by pairing agritech technical specialists with development economists, ecologists, engineers and investment partners to grow a better tomorrow."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "Services" }]}
         badges={["End-to-End", "Climate Positive", "Evidence-Based"]}
         ctas={[{ label: "Request a Proposal", to: "/contact" }]}
@@ -48,7 +52,7 @@ function ServicesPage() {
           <FloatingGlassCard>
             <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-4">Practice Areas</p>
             <div className="grid grid-cols-2 gap-3">
-              {["Consultancy", "Irrigation", "Climate", "Training", "Agribusiness", "M&E"].map((s) => (
+              {["Advisory and Consultancy", "Training and Capacity Building", "Value Chain Development", "Climate Smart Technologies", "Seed Potato Certification", "M&E (Monitoring and Evaluation)"].map((s) => (
                 <div key={s} className="rounded-xl bg-white/5 border border-white/8 px-3 py-2.5 text-sm text-white/75 text-center">{s}</div>
               ))}
             </div>
@@ -69,7 +73,9 @@ function ServicesPage() {
           <StaggerContainer className="grid md:grid-cols-2 gap-6">
             {services.map((s) => (
               <StaggerItem key={s.title}>
-                <GlassCard className="group p-8 h-full bg-card">
+                <GlassCard className="group p-8 h-full bg-card overflow-hidden">
+                  <img src={s.image} alt={s.alt} loading="lazy" className="mb-6 aspect-[16/9] w-full rounded-2xl object-cover" />
+                  <PhotoCredit image={s.image} className="mb-5 -mt-4" />
                   <span className="grid size-14 place-items-center rounded-2xl bg-soft text-primary group-hover:scale-110 transition-transform duration-300">
                     <s.icon className="size-7" />
                   </span>

@@ -1,3 +1,4 @@
+import { PhotoCredit } from "@/components/ds/PhotoCredit";
 import { Link } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ChevronRight, ArrowRight } from "lucide-react";
@@ -238,6 +239,7 @@ export function PageHero({
           )}
         </div>
       </div>
+      {!video && <PhotoCredit image={image} className="absolute bottom-3 left-6 right-6 z-10 m-0 w-fit rounded bg-black/60 px-3 py-1 text-white/90" />}
     </section>
   );
 }

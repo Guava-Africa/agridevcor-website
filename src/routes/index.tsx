@@ -1,22 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sprout, Globe2, BarChart3, Shield, Droplets, Sun, Users, Microscope, GraduationCap, LineChart, Leaf, Tractor } from "lucide-react";
+import { ArrowRight, Sprout, BarChart3, Shield, Sun, Users, Microscope, GraduationCap, LineChart, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroSlider } from "@/components/home/HeroSlider";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
-import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
-import { Marquee } from "@/components/motion/Marquee";
 import { SectionHeading } from "@/components/ui/section-heading";
 import {
   CTASection,
   FeatureCard,
-  StatCardGrid,
-  TestimonialCard,
+  // TestimonialCard, // Restore with the testimonials section below.
   ProductCard,
 } from "@/components/ds";
 import aboutImg from "@/assets/about-soil.jpg";
-import projIrrigation from "@/assets/project-irrigation.jpg";
-import projClimate from "@/assets/project-climate.jpg";
+import seedPotato from "@/assets/seed-potato.jpg";
+import redSorghum from "@/assets/red-sorghum.jpg";
+import farmingCommunity from "@/assets/women in tomatoe field.jpg";
+import wateringCrops from "@/assets/man watering maize plants.jpg";
+import harvest from "@/assets/popcorns in sacks.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,24 +30,23 @@ export const Route = createFileRoute("/")({
 });
 
 const services = [
-  { icon: Sprout, title: "Climate-Smart Agriculture", desc: "Regenerative practices, carbon-smart cropping and resilient value chains.", color: "from-primary to-primary-dark" },
-  { icon: Droplets, title: "Irrigation & Water", desc: "Drip, pivot and solar-powered irrigation systems engineered for scale.", color: "from-emerald-600 to-primary-dark" },
-  { icon: BarChart3, title: "Agribusiness Advisory", desc: "Feasibility, market entry and investment structuring for agri-enterprises.", color: "from-teal-700 to-primary-dark" },
-  { icon: GraduationCap, title: "Training & Capacity", desc: "Farmer field schools and extension programs that change practice at scale.", color: "from-green-700 to-primary-dark" },
-  { icon: LineChart, title: "Monitoring & Evaluation", desc: "Theory of change, MEAL frameworks and impact verification.", color: "from-primary-dark to-emerald-900" },
-  { icon: Microscope, title: "Research & Innovation", desc: "Applied research on varieties, soils and climate-resilient systems.", color: "from-emerald-700 to-teal-900" },
+  { icon: BarChart3, title: "Advisory and Consultancy", desc: "Feasibility, market entry and investment structuring for agri-enterprises.", color: "from-primary to-primary-dark" },
+  { icon: GraduationCap, title: "Training and Capacity Building", desc: "Farmer field schools and extension programs that change practice at scale.", color: "from-emerald-600 to-primary-dark" },
+  { icon: Sprout, title: "Value Chain Development", desc: "Market entry, value chain analysis, investor due diligence and offtake structuring.", color: "from-teal-700 to-primary-dark" },
+  { icon: Sun, title: "Climate Smart Technologies", desc: "Drip, pivot and solar-powered irrigation systems engineered for scale.", color: "from-green-700 to-primary-dark" },
+  { icon: Microscope, title: "Seed Potato Certification", desc: "Seed potato certification.", color: "from-primary-dark to-emerald-900" },
+  { icon: LineChart, title: "M&E (Monitoring and Evaluation)", desc: "Theory of change, MEAL frameworks and impact verification.", color: "from-emerald-700 to-teal-900" },
 ];
 
+/* Testimonials temporarily disabled.
 const testimonials = [
   { text: "AgriDevcor designed the most rigorous and grounded irrigation feasibility we've ever commissioned.", author: "Director of Agriculture Programs", location: "Regional Development Bank" },
   { text: "Their team blends world-class technical depth with genuine field empathy. Transformational work.", author: "Sarah Mitchell", location: "Nairobi, Kenya" },
   { text: "The impact on our smallholder cooperative has been immeasurable. We've doubled our yield sustainably.", author: "James Omondi", location: "Kisumu, Kenya" },
   { text: "Finally, an agricultural consultancy that puts both people and planet first. Highly recommended.", author: "Dr. Amina Hassan", location: "Dar es Salaam, Tanzania" },
 ];
+*/
 
-const partners = [
-  "World Bank", "FAO", "USAID", "AfDB", "EU Delegation", "UNDP", "IFAD", "GIZ", "Syngenta", "Corteva",
-];
 
 function Home() {
   return (
@@ -56,18 +55,6 @@ function Home() {
         <HeroSlider />
       </section>
 
-      {/* Stats marquee */}
-      <div className="border-y border-border/60 bg-soft/50 py-5">
-        <Marquee speed="slow">
-          {partners.map((p) => (
-            <span key={p} className="flex items-center gap-3 px-6 text-sm font-semibold text-muted-foreground/60 uppercase tracking-widest">
-              <Tractor className="size-4 text-primary/40" />
-              {p}
-            </span>
-          ))}
-        </Marquee>
-      </div>
-
       {/* Hero message */}
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-4xl text-center">
@@ -75,7 +62,7 @@ function Home() {
             <SectionHeading
               eyebrow="Our Mission"
               title={<>Grow a better tomorrow. <span className="gradient-text">Change lives.</span></>}
-              description="Agricultural transformation is hard. Getting expert support doesn't need to be. We put sustainable farming solutions in your hands, with proven strategies to increase yield, build resilience, and create lasting impact for communities."
+              description="We drive success across the agricultural value chain by pairing agritech technical specialists with development economists, ecologists, engineers and investment partners to grow a better tomorrow."
               align="center"
               className="mx-auto max-w-3xl [&_h2]:text-balance"
             />
@@ -88,6 +75,17 @@ function Home() {
               </Button>
             </div>
           </ScrollReveal>
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { image: farmingCommunity, alt: "Women tending a tomato crop" },
+              { image: wateringCrops, alt: "Farmer watering maize plants" },
+              { image: harvest, alt: "Harvested popcorn stored in sacks" },
+            ].map((photo, index) => (
+              <ScrollReveal key={photo.image} delay={index * 100}>
+                <img src={photo.image} alt={photo.alt} loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover shadow-soft" />
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </SectionShell>
 
@@ -120,22 +118,7 @@ function Home() {
         </div>
       </SectionShell>
 
-      {/* Impact stats */}
-      <SectionShell variant="dark">
-        <div className="container-px mx-auto max-w-7xl">
-          <StatCardGrid
-            stats={[
-              { value: 200, suffix: "+", label: "Projects Delivered" },
-              { value: 12, suffix: "", label: "African Countries" },
-              { value: 15, suffix: "+", label: "Years of Excellence" },
-              { value: 50, suffix: "K+", label: "Farmers Reached" },
-            ]}
-            variant="dark"
-          />
-        </div>
-      </SectionShell>
-
-      {/* Testimonials */}
+      {/* Testimonials temporarily disabled.
       <SectionShell orbs>
         <div className="container-px mx-auto max-w-7xl">
           <ScrollReveal className="text-center mb-16 max-w-2xl mx-auto">
@@ -156,6 +139,7 @@ function Home() {
           </StaggerContainer>
         </div>
       </SectionShell>
+      */}
 
       {/* About preview */}
       <SectionShell variant="soft" orbs>
@@ -164,10 +148,6 @@ function Home() {
             <ScrollReveal>
               <div className="relative">
                 <img src={aboutImg} alt="Hands holding rich soil" loading="lazy" className="rounded-3xl shadow-elegant w-full object-cover aspect-[4/3]" />
-                <GlassCard hover={false} className="absolute -bottom-6 -right-6 p-6 max-w-xs hidden md:block bg-primary text-white border-0">
-                  <Globe2 className="size-8 mb-2 text-primary-light" />
-                  <p className="text-sm">Active programs across <strong>12 African countries</strong></p>
-                </GlassCard>
               </div>
             </ScrollReveal>
 
@@ -177,8 +157,7 @@ function Home() {
                 Development expertise. Agricultural depth. Measurable impact.
               </h2>
               <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                For over a decade we've designed and delivered agricultural transformation programs
-                at every scale — from smallholder cooperatives to national irrigation strategies.
+                We drive success across the agricultural value chain by pairing agritech technical specialists with development economists, ecologists, engineers and investment partners to grow a better tomorrow.
               </p>
               <div className="mt-8 space-y-4">
                 {[
@@ -216,8 +195,8 @@ function Home() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { img: projIrrigation, tag: "Irrigation", title: "Smart Drip Network — Rift Valley", desc: "12,000 ha of horticulture under precision irrigation." },
-              { img: projClimate, tag: "Climate", title: "Solar-Powered Cold Chains", desc: "Off-grid storage for 38 smallholder cooperatives." },
+              { img: seedPotato, tag: "Products", title: "Seed Potato", desc: "AgriDevCor secures high-class seed from international breeders to ensure every seed batch delivers the yield, purity and performance modern farmers depend on." },
+              { img: redSorghum, tag: "Products", title: "Red Sorghum", desc: "Is a red-pigmented cereal grain that thrives in low rainfall areas due to its drought resistance. It is a versatile raw material for brewing, stockfeed, natural dyes and biofuel." },
             ].map((product, index) => (
               <ScrollReveal key={product.title} delay={index * 120}>
                 <ProductCard

@@ -53,7 +53,7 @@ const images = [
   { src: greenhouse, alt: "Greenhouse farming", category: "Greenhouse" },
   { src: irrigation, alt: "Irrigation system", category: "Irrigation" },
   { src: projCoffee, alt: "Aerial view of coffee plantation", category: "Agriculture" },
-  { src: sorghum, alt: "Sorghum production", category: "Crops" },
+  { src: sorghum, alt: "Cereal crop production", category: "Crops" },
   { src: strawberries, alt: "Fresh strawberries", category: "Horticulture" },
   { src: strawberryPlants, alt: "Strawberry cultivation", category: "Horticulture" },
   { src: projClimate, alt: "Solar-powered cold chain facility", category: "Climate" },

@@ -30,19 +30,19 @@ const quickLinks = [
 ];
 
 const products = [
-  { label: "Climate-Smart Irrigation", to: "/products" },
-  { label: "Community Farming", to: "/community-farming" },
-  { label: "Greenhouse Production", to: "/products" },
-  { label: "Sorghum Value Chain", to: "/products" },
-  { label: "Post-Harvest Programs", to: "/products" },
+  { label: "Seed Potato", to: "/products" },
+  { label: "Red Sorghum", to: "/products" },
+  { label: "Michigan Pea Bean", to: "/products" },
+  { label: "Crop Production Manuals", to: "/products" },
 ];
 
 const services = [
-  { label: "Agricultural Consultancy", to: "/services" },
-  { label: "Farm Development", to: "/services" },
-  { label: "Irrigation Solutions", to: "/services" },
-  { label: "Training Programs", to: "/services" },
-  { label: "Monitoring & Evaluation", to: "/services" },
+  { label: "Advisory and Consultancy", to: "/services" },
+  { label: "Training and Capacity Building", to: "/services" },
+  { label: "Value Chain Development", to: "/services" },
+  { label: "Climate Smart Technologies", to: "/services" },
+  { label: "Seed Potato Certification", to: "/services" },
+  { label: "M&E (Monitoring and Evaluation)", to: "/services" },
 ];
 
 export function Footer() {
@@ -56,8 +56,7 @@ export function Footer() {
           <ScrollReveal className="lg:col-span-2">
             <Logo variant="light" imgClassName="h-20 md:h-24 w-auto" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">
-              Growing a better tomorrow through sustainable agriculture,
-              climate-smart innovation, and inclusive rural development across Africa.
+              We drive success across the agricultural value chain by pairing agritech technical specialists with development economists, ecologists, engineers and investment partners to grow a better tomorrow.
             </p>
             <ul className="mt-6 flex items-center gap-3">
               {socials.map(({ href, label, Icon }) => (

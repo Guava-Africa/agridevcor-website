@@ -1,3 +1,4 @@
+import { PhotoCredit } from "@/components/ds/PhotoCredit";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
@@ -40,6 +41,7 @@ export function ImageBanner({
           />
           <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10 pointer-events-none" />
         </div>
+        <PhotoCredit image={image} />
       </ScrollReveal>
 
       <ScrollReveal delay={120} className={cn(!imageFirst && "lg:order-1")}>

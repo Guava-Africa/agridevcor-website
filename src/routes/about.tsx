@@ -5,17 +5,16 @@ import { PageHero } from "@/components/motion/PageHero";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
-import { FloatingGlassCard } from "@/components/motion/GlassCard";
-import { AnimatedCounter } from "@/components/motion/AnimatedCounter";
 import chairmanImg from "@/assets/chairman.png";
 import aboutVideo from "@/assets/aboutUs.mp4";
+import farmerImg from "@/assets/woman in field.jpg";
 import aboutImg from "@/assets/about-soil.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About AgriDevcor — Our story & leadership" },
-      { name: "description", content: "Founded in 2009, AgriDevcor is a multidisciplinary agricultural development consultancy working across Africa, Asia and Latin America." },
+      { name: "description", content: "Founded in 2020, AgriDevcor is a multidisciplinary agricultural development consultancy working across Africa, Asia and Latin America." },
       { property: "og:title", content: "About AgriDevcor" },
       { property: "og:description", content: "Our story, mission and the team driving agricultural transformation." },
       { property: "og:url", content: "/about" },
@@ -33,31 +32,15 @@ function AboutPage() {
         image={aboutImg}
         eyebrow="About AgriDevcor"
         title={<>Agricultural scientists. <span className="text-primary-light">Development leaders.</span></>}
-        description="AgriDevcor is a multidisciplinary agricultural development consultancy helping governments, investors, development agencies and farming communities build resilient agricultural systems that create sustainable economic growth and lasting impact."
+        description="We drive success across the agricultural value chain by pairing agritech technical specialists with development economists, ecologists, engineers and investment partners to grow a better tomorrow."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "About" }]}
-        badges={["Founded 2009", "12+ Countries", "Evidence-Based"]}
+        badges={["Founded 2020", "Evidence-Based"]}
         ctas={[
           { label: "Partner With Us", to: "/contact" },
           { label: "Explore Services", to: "/services", variant: "outline" },
         ]}
         floatingCard={
-          <FloatingGlassCard>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/50 mb-4">Our Reach</p>
-            <div className="space-y-4">
-              {[
-                { value: 15, suffix: "+", label: "Years of Excellence" },
-                { value: 200, suffix: "+", label: "Projects Delivered" },
-                { value: 12, suffix: "", label: "African Countries" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center justify-between rounded-xl bg-white/5 border border-white/8 px-4 py-3">
-                  <span className="text-sm text-white/60">{s.label}</span>
-                  <span className="text-xl font-bold text-white">
-                    <AnimatedCounter value={s.value} suffix={s.suffix} />
-                  </span>
-                </div>
-              ))}
-            </div>
-          </FloatingGlassCard>
+          <img src={farmerImg} alt="Farmer working in a crop field" loading="lazy" className="aspect-[4/5] max-h-[420px] w-full rounded-3xl object-cover shadow-elegant" />
         }
       />
 
@@ -118,8 +101,8 @@ function AboutPage() {
           <ScrollReveal className="flex justify-center mb-12">
             <GlassCard className="bg-primary text-primary-foreground p-8 w-full max-w-sm text-center border-0">
               <div className="size-28 rounded-full bg-white/15 mx-auto flex items-center justify-center text-white/50 text-sm">Photo</div>
-              <h3 className="mt-5 text-2xl font-bold">Managing Director Name</h3>
-              <p className="mt-1 opacity-90">Managing Director</p>
+              <h3 className="mt-5 text-2xl font-bold">General Manager Name</h3>
+              <p className="mt-1 opacity-90">General Manager</p>
               <p className="mt-4 text-sm opacity-85">
                 Leads company strategy, operations, partnerships, and execution across all programs.
               </p>
@@ -128,10 +111,10 @@ function AboutPage() {
 
           <StaggerContainer className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {[
-              { title: "Head of Agricultural Development", icon: Briefcase },
-              { title: "Head of Research & Analytics", icon: BarChart3 },
-              { title: "Head of Capacity Building", icon: Users },
-              { title: "Head of Finance & Operations", icon: Landmark },
+              { title: "Head Potato Seed Programme", icon: Briefcase },
+              { title: "Head MPB Programme", icon: Users },
+              { title: "Head Finance, HR and Administration", icon: Landmark },
+              { title: "Head Business Performance Management", icon: BarChart3 },
             ].map((person) => (
               <StaggerItem key={person.title}>
                 <GlassCard className="p-8 text-center h-full bg-card">

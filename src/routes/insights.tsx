@@ -1,11 +1,15 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
-import { Clock, ArrowRight, Droplets, Sun, Microscope, Sprout, Sparkles } from "lucide-react";
+import { ArrowRight, Droplets, Sun, Microscope, Sprout, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/motion/PageHero";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { GlassCard } from "@/components/motion/GlassCard";
 import { SectionShell } from "@/components/motion/SectionShell";
+import soilImg from "@/assets/about-soil.jpg";
+import irrigationImg from "@/assets/man watering maize plants.jpg";
+import fieldsImg from "@/assets/hero-fields.jpg";
+import communityImg from "@/assets/women in tomatoe field.jpg";
 import insightsImg from "@/images/insights.png";
 
 export const Route = createFileRoute("/insights")({
@@ -25,11 +29,11 @@ export const Route = createFileRoute("/insights")({
 type Tag = "All" | "Research" | "Sustainability" | "Innovation" | "Agriculture" | "Climate";
 
 const posts = [
-  { tag: "Sustainability" as const, icon: Sprout, title: "Five levers to decarbonize African agri-value chains", excerpt: "From regenerative cropping to logistics electrification, where carbon really lives in the chain.", read: "8 min" },
-  { tag: "Innovation" as const, icon: Droplets, title: "Why precision irrigation is the next frontier", excerpt: "Solar, IoT and smart valves are reshaping what irrigation can deliver.", read: "6 min" },
-  { tag: "Climate" as const, icon: Sun, title: "Designing climate finance that reaches the farm gate", excerpt: "Most climate dollars stall before the farmer. Here's how to fix that.", read: "10 min" },
-  { tag: "Research" as const, icon: Microscope, title: "What 9 maize varieties taught us about resilience", excerpt: "Lessons from a multi-year trial across agro-ecological zones.", read: "7 min" },
-  { tag: "Agriculture" as const, icon: Sprout, title: "Cooperatives 2.0 — beyond aggregation", excerpt: "Modern cooperatives compete on data, finance and shared services.", read: "9 min" },
+  { tag: "Sustainability" as const, image: soilImg, alt: "Hands holding soil and a young plant", icon: Sprout, title: "Five levers to decarbonize African agri-value chains", excerpt: "From regenerative cropping to logistics electrification, where carbon really lives in the chain." },
+  { tag: "Innovation" as const, image: irrigationImg, alt: "Farmer irrigating maize plants", icon: Droplets, title: "Why precision irrigation is the next frontier", excerpt: "Solar, IoT and smart valves are reshaping what irrigation can deliver." },
+  { tag: "Climate" as const, image: fieldsImg, alt: "Cultivated farmland viewed from above", icon: Sun, title: "Designing climate finance that reaches the farm gate", excerpt: "Most climate dollars stall before the farmer. Here's how to fix that." },
+  { tag: "Research" as const, image: irrigationImg, alt: "Maize plants growing in a field", icon: Microscope, title: "Maize varieties and agricultural resilience", excerpt: "Lessons from a multi-year trial across agro-ecological zones." },
+  { tag: "Agriculture" as const, image: communityImg, alt: "Women working together in a tomato field", icon: Sprout, title: "Cooperatives 2.0 — beyond aggregation", excerpt: "Modern cooperatives compete on data, finance and shared services." },
 ];
 
 const tags: Tag[] = ["All", "Research", "Sustainability", "Innovation", "Agriculture", "Climate"];
@@ -78,7 +82,8 @@ function InsightsPage() {
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {visible.map((p) => (
               <StaggerItem key={p.title}>
-                <GlassCard className="group p-8 h-full flex flex-col bg-card">
+                <GlassCard className="group p-8 h-full flex flex-col bg-card overflow-hidden">
+                  <img src={p.image} alt={p.alt} loading="lazy" className="mb-6 aspect-[16/10] w-full rounded-2xl object-cover" />
                   <div className="size-14 rounded-2xl bg-soft grid place-items-center text-primary group-hover:scale-110 transition-transform duration-300">
                     <p.icon size={26} />
                   </div>
@@ -86,7 +91,6 @@ function InsightsPage() {
                   <h3 className="mt-3 text-xl font-semibold">{p.title}</h3>
                   <p className="mt-3 text-muted-foreground flex-grow leading-relaxed">{p.excerpt}</p>
                   <div className="mt-6 flex justify-between items-center pt-4 border-t border-border">
-                    <span className="flex gap-2 text-sm text-muted-foreground"><Clock size={15} />{p.read}</span>
                     <button className="text-primary font-semibold flex gap-1 items-center group-hover:gap-2 transition-all">
                       Read more <ArrowRight size={15} />
                     </button>
